@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  client:
+    image: cloudcarbonfootprint/client:latest
+    platform: linux/amd64
+    ports:
+      - '80:80'
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api
+  api:
+    image: docker.io/cloudcarbonfootprint/api:latest
+    platform: linux/amd64
+    ports:
+      - '4000:4000'
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials
+    secrets:
+      - AWS_TARGET_ACCOUNT_ROLE_NAME
+      - AWS_ATHENA_DB_NAME
+      - AWS_ATHENA_DB_TABLE
+      - AWS_ATHENA_REGION
+      - AWS_ATHENA_QUERY_RESULT_LOCATION
+      - AWS_BILLING_ACCOUNT_ID
+      - AWS_BILLING_ACCOUNT_NAME
+    environment:
+      - AWS_USE_BILLING_DATA=true
+      - AWS_TARGET_ACCOUNT_ROLE_NAME=/run/secrets/AWS_TARGET_ACCOUNT_ROLE_NAME
+      - AWS_ATHENA_DB_NAME=/run/secrets/AWS_ATHENA_DB_NAME
+      - AWS_ATHENA_DB_TABLE=/run/secrets/AWS_ATHENA_DB_TABLE
+      - AWS_ATHENA_REGION=/run/secrets/AWS_ATHENA_REGION
+      - AWS_ATHENA_QUERY_RESULT_LOCATION=/run/secrets/AWS_ATHENA_QUERY_RESULT_LOCATION
+      - AWS_BILLING_ACCOUNT_ID=/run/secrets/AWS_BILLING_ACCOUNT_ID
+      - AWS_BILLING_ACCOUNT_NAME=/run/secrets/AWS_BILLING_ACCOUNT_NAME
+secrets:
+  AWS_TARGET_ACCOUNT_ROLE_NAME:
+    file: ~/.docker/secrets/AWS_TARGET_ACCOUNT_ROLE_NAME
+  AWS_ATHENA_DB_NAME:
+    file: ~/.docker/secrets/AWS_ATHENA_DB_NAME
+  AWS_ATHENA_DB_TABLE:
+    file: ~/.docker/secrets/AWS_ATHENA_DB_TABLE
+  AWS_ATHENA_REGION:
+    file: ~/.docker/secrets/AWS_ATHENA_REGION
+  AWS_ATHENA_QUERY_RESULT_LOCATION:
+    file: ~/.docker/secrets/AWS_ATHENA_QUERY_RESULT_LOCATION
+  AWS_BILLING_ACCOUNT_ID:
+    file: ~/.docker/secrets/AWS_BILLING_ACCOUNT_ID
+  AWS_BILLING_ACCOUNT_NAME:
+    file: ~/.docker/secrets/AWS_BILLING_ACCOUNT_NAME
