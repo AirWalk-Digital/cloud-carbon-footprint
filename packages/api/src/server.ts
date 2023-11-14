@@ -48,7 +48,7 @@ if (process.env.ENABLE_CORS) {
 
 httpApp.use('/api', createRouter())
 
-httpApp.listen(port, () => {
+httpApp.listen(port, '0.0.0.0', () => {
   serverLogger.info(
     `Cloud Carbon Footprint Server listening at http://0.0.0.0:${port}`,
   )
