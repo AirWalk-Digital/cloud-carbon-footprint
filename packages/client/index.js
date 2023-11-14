@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 app.listen(port, () =>
   console.log(
-    `Cloud Carbon Footprint Server listening at http://localhost:${port}`,
+    `Cloud Carbon Footprint Server listening at http://0.0.0.0:${port}`,
   ),
 )
 
