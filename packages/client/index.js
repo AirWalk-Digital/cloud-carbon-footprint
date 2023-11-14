@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-app.listen(port, () =>
+app.listen(port, '0.0.0.0', () =>
   console.log(
     `Cloud Carbon Footprint Server listening at http://0.0.0.0:${port}`,
   ),
