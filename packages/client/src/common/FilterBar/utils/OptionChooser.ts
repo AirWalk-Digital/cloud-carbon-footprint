@@ -5,13 +5,13 @@
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions
+  FilterOptions,
 } from "../../../Types";
 import { DropdownSelections, optionIsInDropdownOptions } from "./FiltersUtil";
 import {
   ALL_DROPDOWN_FILTER_OPTIONS,
   ALL_KEY,
-  CLOUD_PROVIDER_OPTIONS
+  CLOUD_PROVIDER_OPTIONS,
 } from "./DropdownConstants";
 
 export abstract class OptionChooser {
@@ -62,7 +62,7 @@ export abstract class OptionChooser {
             this.addAllDropDownOptions(
               this.choosers[option](),
               option as DropdownFilterOptions
-            )
+            ),
           ];
         })
       );
