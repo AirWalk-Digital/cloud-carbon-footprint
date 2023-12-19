@@ -10,7 +10,7 @@ import { Typography } from "@material-ui/core";
 import {
   GroupBy,
   RecommendationResult,
-  ServiceData
+  ServiceData,
 } from "@cloud-carbon-footprint/common";
 import useStyles from "./forecastStyles";
 import ForecastCard from "../ForecastCard";
@@ -21,7 +21,7 @@ import {
   calculatePercentChange,
   formattedNumberWithCommas,
   checkIfAllDatesExistForForecast,
-  co2eUnitMultiplier
+  co2eUnitMultiplier,
 } from "../../../../utils/helpers";
 import { Co2eUnit } from "../../../../Types";
 import { Error, ErrorList } from "./Error";
@@ -41,17 +41,17 @@ export type ForecastDetails = {
 export const ForecastError = {
   GROUPING_METHOD: "GROUPING",
   DATE_RANGE: "RANGE",
-  MISSING_DAYS: "DAYS"
+  MISSING_DAYS: "DAYS",
 } as const;
 
 export type ForecastErrorType =
-  typeof ForecastError[keyof typeof ForecastError];
+  typeof ForecastError[keyof (typeof ForecastError)];
 
 const Forecast: FunctionComponent<ForecastProps> = ({
   emissionsData,
   recommendations,
   co2eUnit,
-  forecastDetails
+  forecastDetails,
 }): ReactElement => {
   const classes = useStyles();
 
@@ -103,7 +103,7 @@ const Forecast: FunctionComponent<ForecastProps> = ({
   const { missingDates, groupBy } = forecastDetails;
   const allDatesExistForForecast = checkIfAllDatesExistForForecast({
     missingDates,
-    groupBy
+    groupBy,
   });
   const sortedMissingDates = missingDates.sort((a, b) => {
     return a.valueOf() - b.valueOf();
