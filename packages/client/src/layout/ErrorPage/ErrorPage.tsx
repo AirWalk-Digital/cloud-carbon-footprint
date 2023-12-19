@@ -38,29 +38,29 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cloudIcon: {
       fontSize: "175px",
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
     },
     errorStatus: {
       fontSize: "36px",
-      textAlign: "center"
+      textAlign: "center",
     },
     errorMessage: {
       fontSize: "18px",
-      textAlign: "center"
-    }
+      textAlign: "center",
+    },
   })
 );
 
 const DEFAULT_ERROR = {
   status: "520",
-  statusText: "Unknown Error"
+  statusText: "Unknown Error",
 };
 
 export const formatAxiosError = (e: AxiosError): ErrorState => {
   return e.response
     ? {
         status: e.response.status.toString(),
-        statusText: e.response.statusText
+        statusText: e.response.statusText,
       }
     : DEFAULT_ERROR;
 };
