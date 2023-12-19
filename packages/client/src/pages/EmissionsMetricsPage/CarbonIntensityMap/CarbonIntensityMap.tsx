@@ -2,36 +2,36 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { ReactElement, useState } from 'react'
-import { Box, Typography } from '@material-ui/core'
-import SelectDropdown from '../../../common/SelectDropdown'
-import DashboardCard from '../../../layout/DashboardCard'
-import AWSMap from './AWSMap.png'
-import GCPMap from './GCPMap.png'
-import AzureMap from './AzureMap.png'
-import useStyles from './carbonIntensityStyles'
+import React, { ReactElement, useState } from "react";
+import { Box, Typography } from "@material-ui/core";
+import SelectDropdown from "../../../common/SelectDropdown";
+import DashboardCard from "../../../layout/DashboardCard";
+import AWSMap from "./AWSMap.png";
+import GCPMap from "./GCPMap.png";
+import AzureMap from "./AzureMap.png";
+import useStyles from "./carbonIntensityStyles";
 
-type CloudProvider = 'AWS' | 'GCP' | 'Azure'
+type CloudProvider = "AWS" | "GCP" | "Azure";
 //| 'AliCloud' - TODO: Add back when map is ready
 
 type IntensityMaps = {
-  [provider in CloudProvider]: React.ReactNode
-}
+  [provider in CloudProvider]: React.ReactNode;
+};
 
 const CarbonIntensityMap = (): ReactElement => {
-  const [cloudProvider, setCloudProvider] = useState('AWS')
-  const classes = useStyles()
+  const [cloudProvider, setCloudProvider] = useState("AWS");
+  const classes = useStyles();
 
   const intensityMaps: IntensityMaps = {
     AWS: AWSMap,
     GCP: GCPMap,
-    Azure: AzureMap,
+    Azure: AzureMap
     // AliCloud: AliMap TODO: Add Carbon Intensity Map and enable
-  }
+  };
 
   const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
-    setCloudProvider(event.target.value)
-  }
+    setCloudProvider(event.target.value);
+  };
 
   return (
     <DashboardCard>
@@ -57,7 +57,7 @@ const CarbonIntensityMap = (): ReactElement => {
         </Box>
       </>
     </DashboardCard>
-  )
-}
+  );
+};
 
-export default CarbonIntensityMap
+export default CarbonIntensityMap;

@@ -2,19 +2,19 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { FunctionComponent, ReactElement } from 'react'
-import { IconButton, Tooltip as MaterialTooltip } from '@material-ui/core'
-import HelpIcon from '@material-ui/icons/Help'
-import useStyles, { TextOnlyTooltip } from './tooltipStyles'
+import { FunctionComponent, ReactElement } from "react";
+import { IconButton, Tooltip as MaterialTooltip } from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import useStyles, { TextOnlyTooltip } from "./tooltipStyles";
 
 type TooltipProps = {
-  message: string
-}
+  message: string;
+};
 
 const Tooltip: FunctionComponent<TooltipProps> = ({
-  message,
+  message
 }): ReactElement => {
-  const classes = useStyles(MaterialTooltip)
+  const classes = useStyles(MaterialTooltip);
   return (
     <TextOnlyTooltip
       data-testid="tooltip"
@@ -27,7 +27,7 @@ const Tooltip: FunctionComponent<TooltipProps> = ({
         <HelpIcon />
       </IconButton>
     </TextOnlyTooltip>
-  )
-}
+  );
+};
 
-export default Tooltip
+export default Tooltip;

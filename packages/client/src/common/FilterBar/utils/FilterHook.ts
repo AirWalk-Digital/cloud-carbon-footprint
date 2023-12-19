@@ -2,24 +2,24 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { FilterResultResponse, FilterResults } from '../../../Types'
-import { Filters } from './Filters'
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { FilterResultResponse, FilterResults } from "../../../Types";
+import { Filters } from "./Filters";
 
 export interface UseFiltersResults {
-  filteredData: FilterResults
-  filters: Filters
-  setFilters: Dispatch<SetStateAction<Filters>>
+  filteredData: FilterResults;
+  filters: Filters;
+  setFilters: Dispatch<SetStateAction<Filters>>;
 }
 
 const useFilters = (
   data: FilterResults,
   buildFilters: (FilterResultResponse) => Filters,
   filteredResponse: FilterResultResponse,
-  isDataLoaded?: boolean,
+  isDataLoaded?: boolean
 ): UseFiltersResults => {
-  const [filteredData, setFilteredData] = useState(data)
-  const [filters, setFilters] = useState(() => buildFilters(filteredResponse))
+  const [filteredData, setFilteredData] = useState(data);
+  const [filters, setFilters] = useState(() => buildFilters(filteredResponse));
 
   /*
     TODO: Clean up Recommendations dependency check.
@@ -27,14 +27,14 @@ const useFilters = (
     Otherwise, it will throw errors.
    */
   useEffect(() => {
-    setFilteredData(filters.filter(data))
-  }, [setFilteredData, filters, isDataLoaded])
+    setFilteredData(filters.filter(data));
+  }, [setFilteredData, filters, isDataLoaded]);
 
   useEffect(() => {
-    setFilters(buildFilters(filteredResponse))
-  }, [filteredResponse])
+    setFilters(buildFilters(filteredResponse));
+  }, [filteredResponse]);
 
-  return { filteredData, filters, setFilters }
-}
+  return { filteredData, filters, setFilters };
+};
 
-export default useFilters
+export default useFilters;

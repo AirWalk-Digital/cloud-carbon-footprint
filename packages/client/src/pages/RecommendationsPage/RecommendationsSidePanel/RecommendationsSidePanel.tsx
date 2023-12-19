@@ -2,33 +2,33 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, ReactElement } from 'react'
-import { Container, Divider, Grid } from '@material-ui/core'
-import SidePanel from '../../../common/SidePanel'
-import { RecommendationRow } from '../../../Types'
-import { RecommendationsPanelRow, RecommendationsPanelColumn } from './layout'
-import useStyles from './recommendationsSidePanelStyles'
+import React, { FunctionComponent, ReactElement } from "react";
+import { Container, Divider, Grid } from "@material-ui/core";
+import SidePanel from "../../../common/SidePanel";
+import { RecommendationRow } from "../../../Types";
+import { RecommendationsPanelRow, RecommendationsPanelColumn } from "./layout";
+import useStyles from "./recommendationsSidePanelStyles";
 import {
   tableFormatNearZero,
-  tableFormatRawCo2e,
-} from '../../../utils/helpers/transformData'
-import { co2eUnitLabel } from '../../../utils/helpers'
+  tableFormatRawCo2e
+} from "../../../utils/helpers/transformData";
+import { co2eUnitLabel } from "../../../utils/helpers";
 
 export type RecommendationsSidePanelProps = {
-  recommendation: RecommendationRow
-  onClose?: () => void
-}
+  recommendation: RecommendationRow;
+  onClose?: () => void;
+};
 
 const RecommendationsSidePanel: FunctionComponent<
   RecommendationsSidePanelProps
 > = ({ recommendation, onClose }): ReactElement => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  let resourceName = recommendation.instanceName
-  if (recommendation.recommendationType.includes('EBS')) {
-    resourceName = recommendation.resourceId
-  } else if (recommendation.recommendationType.includes('Lambda')) {
-    resourceName = recommendation.resourceId.split(':')[0]
+  let resourceName = recommendation.instanceName;
+  if (recommendation.recommendationType.includes("EBS")) {
+    resourceName = recommendation.resourceId;
+  } else if (recommendation.recommendationType.includes("Lambda")) {
+    resourceName = recommendation.resourceId.split(":")[0];
   }
   return (
     <SidePanel
@@ -84,7 +84,7 @@ const RecommendationsSidePanel: FunctionComponent<
           subLabel={`(${co2eUnitLabel[recommendation.co2eUnit]})`}
           content={tableFormatRawCo2e(
             recommendation.co2eUnit,
-            recommendation.co2eSavings,
+            recommendation.co2eSavings
           )}
         />
         <RecommendationsPanelColumn
@@ -94,7 +94,7 @@ const RecommendationsSidePanel: FunctionComponent<
         />
       </Grid>
     </SidePanel>
-  )
-}
+  );
+};
 
-export default RecommendationsSidePanel
+export default RecommendationsSidePanel;

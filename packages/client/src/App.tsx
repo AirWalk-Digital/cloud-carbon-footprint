@@ -36,10 +36,10 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
   );
 
   const endDate: Moment = getEmissionDateRange({
-    config: loadConfig(),
+    config: loadConfig()
   }).end;
   const startDate: Moment = getEmissionDateRange({
-    config: loadConfig(),
+    config: loadConfig()
   }).start;
 
   const footprint = useFootprintData({
@@ -49,7 +49,7 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
     onApiError,
     groupBy: config.GROUP_BY,
     limit: parseInt(config.PAGE_LIMIT as unknown as string),
-    ignoreCache: config.DISABLE_CACHE,
+    ignoreCache: config.DISABLE_CACHE
   });
 
   const [mobileWarningEnabled, setMobileWarningEnabled] = useState(
@@ -63,8 +63,8 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
   const useStyles = makeStyles(() => ({
     appContainer: {
       padding: 0,
-      height: "calc(100vh - 65px)",
-    },
+      height: "calc(100vh - 65px)"
+    }
   }));
 
   const classes = useStyles();

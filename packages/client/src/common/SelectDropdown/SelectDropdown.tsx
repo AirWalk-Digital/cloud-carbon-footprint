@@ -2,22 +2,22 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { ChangeEvent, FunctionComponent, ReactElement } from 'react'
-import { FormControl, MenuItem, Select } from '@material-ui/core'
-import BootstrapInput from './selectDropdownStyles'
+import React, { ChangeEvent, FunctionComponent, ReactElement } from "react";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
+import BootstrapInput from "./selectDropdownStyles";
 
 type SelectDropdownProps = {
-  id?: string
-  value: string
-  dropdownOptions: string[]
-  handleChange: (event: ChangeEvent<{ value: unknown }>) => void
-}
+  id?: string;
+  value: string;
+  dropdownOptions: string[];
+  handleChange: (event: ChangeEvent<{ value: unknown }>) => void;
+};
 
 const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
   id,
   value,
   dropdownOptions,
-  handleChange,
+  handleChange
 }): ReactElement => (
   <FormControl variant="outlined">
     <Select
@@ -35,6 +35,6 @@ const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
       ))}
     </Select>
   </FormControl>
-)
+);
 
-export default SelectDropdown
+export default SelectDropdown;

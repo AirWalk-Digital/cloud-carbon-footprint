@@ -2,22 +2,22 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent } from 'react'
-import FilterDropdown from '../../common/FilterDropdown'
-import { DropdownFilterOptions, DropdownOption, FilterProps } from '../../Types'
+import React, { FunctionComponent } from "react";
+import FilterDropdown from "../../common/FilterDropdown";
+import { DropdownFilterOptions, DropdownOption, FilterProps } from "../../Types";
 
 const AccountFilter: FunctionComponent<FilterProps> = ({
   filters,
   setFilters,
   options,
 }) => {
-  const accountOptions = options.accounts
+  const accountOptions = options.accounts;
   return (
     <FilterDropdown
       id="accounts-filter"
       displayValue={filters.label(
         accountOptions,
-        DropdownFilterOptions.ACCOUNTS,
+        DropdownFilterOptions.ACCOUNTS
       )}
       options={accountOptions}
       selections={filters.options.accounts}
@@ -27,12 +27,12 @@ const AccountFilter: FunctionComponent<FilterProps> = ({
           filters.withDropdownOption(
             selections,
             options,
-            DropdownFilterOptions.ACCOUNTS,
-          ),
-        )
+            DropdownFilterOptions.ACCOUNTS
+          )
+        );
       }}
     />
-  )
-}
+  );
+};
 
-export default AccountFilter
+export default AccountFilter;

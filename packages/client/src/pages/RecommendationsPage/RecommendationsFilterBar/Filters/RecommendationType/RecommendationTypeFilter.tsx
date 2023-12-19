@@ -2,26 +2,26 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent } from 'react'
-import FilterDropdown from '../../../../../common/FilterDropdown'
+import React, { FunctionComponent } from "react";
+import FilterDropdown from "../../../../../common/FilterDropdown";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterProps,
-} from '../../../../../Types'
+  FilterProps
+} from "../../../../../Types";
 
 const RecommendationTypeFilter: FunctionComponent<FilterProps> = ({
   filters,
   setFilters,
-  options,
+  options
 }) => {
-  const recommendationTypeOptions = options.recommendationTypes
+  const recommendationTypeOptions = options.recommendationTypes;
   return (
     <FilterDropdown
       id="recommendations-type-filter"
       displayValue={filters.label(
         recommendationTypeOptions,
-        DropdownFilterOptions.RECOMMENDATION_TYPES,
+        DropdownFilterOptions.RECOMMENDATION_TYPES
       )}
       options={recommendationTypeOptions}
       selections={filters.options.recommendationTypes}
@@ -31,12 +31,12 @@ const RecommendationTypeFilter: FunctionComponent<FilterProps> = ({
           filters.withDropdownOption(
             selections,
             options,
-            DropdownFilterOptions.RECOMMENDATION_TYPES,
-          ),
-        )
+            DropdownFilterOptions.RECOMMENDATION_TYPES
+          )
+        );
       }}
     />
-  )
-}
+  );
+};
 
-export default RecommendationTypeFilter
+export default RecommendationTypeFilter;

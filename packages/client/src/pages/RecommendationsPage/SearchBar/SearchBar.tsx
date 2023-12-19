@@ -2,24 +2,24 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { FunctionComponent } from 'react'
-import { IconButton, TextField } from '@material-ui/core'
-import ClearIcon from '@material-ui/icons/Clear'
-import SearchIcon from '@material-ui/icons/Search'
-import useStyles from './searchBarStyles'
+import { FunctionComponent } from "react";
+import { IconButton, TextField } from "@material-ui/core";
+import ClearIcon from "@material-ui/icons/Clear";
+import SearchIcon from "@material-ui/icons/Search";
+import useStyles from "./searchBarStyles";
 
 type SearchBarProps = {
-  value: string
-  onChange: (string) => void
-  clearSearch: () => void
-}
+  value: string;
+  onChange: (string) => void;
+  clearSearch: () => void;
+};
 
 const SearchBar: FunctionComponent<SearchBarProps> = ({
   value,
   onChange,
-  clearSearch,
+  clearSearch
 }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <TextField
       data-testid="search-input"
@@ -36,15 +36,15 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
             title="Clear Search"
             aria-label="clear search"
             size="small"
-            style={{ visibility: value ? 'visible' : 'hidden' }}
+            style={{ visibility: value ? "visible" : "hidden" }}
             onClick={clearSearch}
           >
             <ClearIcon fontSize="small" />
           </IconButton>
-        ),
+        )
       }}
     />
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

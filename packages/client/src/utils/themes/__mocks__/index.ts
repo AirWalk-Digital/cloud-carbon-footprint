@@ -2,6 +2,6 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-const getChartColors = (): string[] => ['#000000', '#FFFFFF']
+const getChartColors = (): string[] => ["#000000", "#FFFFFF"];
 
-export { getChartColors }
+export { getChartColors };

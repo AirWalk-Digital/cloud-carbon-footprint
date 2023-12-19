@@ -2,174 +2,179 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, useEffect } from 'react'
-import { equals } from 'ramda'
-import moment, { unitOfTime } from 'moment'
-import { renderToStaticMarkup } from 'react-dom/server'
-import ApexCharts from 'apexcharts'
-import Chart from 'react-apexcharts'
-import { useTheme } from '@material-ui/core/styles'
-import { GetApp, PanTool, RotateLeft, ZoomIn } from '@material-ui/icons'
-import { EstimationResult } from '@cloud-carbon-footprint/common'
-import { ApexChartProps, DateRange } from '../../../../Types'
-import { getChartColors, CCFTheme } from '../../../../utils/themes'
-import { sumServiceTotals, getMaxOfDataSeries } from '../../../../utils/helpers'
-import { filterBy, sortByDate } from './helpers'
-import CustomTooltip from './CustomTooltip'
+import React, { FunctionComponent, useEffect } from "react";
+import { equals } from "ramda";
+import moment, { unitOfTime } from "moment";
+import { renderToStaticMarkup } from "react-dom/server";
+import ApexCharts from "apexcharts";
+import Chart from "react-apexcharts";
+import { useTheme } from "@material-ui/core/styles";
+import { GetApp, PanTool, RotateLeft, ZoomIn } from "@material-ui/icons";
+import { EstimationResult } from "@cloud-carbon-footprint/common";
+import { ApexChartProps, DateRange } from "../../../../Types";
+import { getChartColors, CCFTheme } from "../../../../utils/themes";
+import {
+  sumServiceTotals,
+  getMaxOfDataSeries
+} from "../../../../utils/helpers";
+import { filterBy, sortByDate } from "./helpers";
+import CustomTooltip from "./CustomTooltip";
 
 type LegendToggle = {
-  [key: string]: boolean
-}
+  [key: string]: boolean;
+};
 
 const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
-  const theme = useTheme() as CCFTheme
-  const colors = getChartColors(theme)
-  const [blue, yellow, green] = [colors[0], colors[5], colors[8]]
+  const theme = useTheme() as CCFTheme;
+  const colors = getChartColors(theme);
+  const [blue, yellow, green] = [colors[0], colors[5], colors[8]];
 
   const [dateRange, setDateRange] = React.useState<DateRange>({
     min: null,
-    max: null,
-  })
-  const [chartData, setChartData] = React.useState<EstimationResult[]>([])
+    max: null
+  });
+  const [chartData, setChartData] = React.useState<EstimationResult[]>([]);
   const [defaultRange, setDefaultRange] = React.useState<DateRange>({
     min: null,
-    max: null,
-  })
+    max: null
+  });
   const [toggledSeries, setToggledSeries] = React.useState<LegendToggle[]>([
     { CO2e: true },
-    { 'Kilowatt Hours': false },
-    { Cost: false },
-  ])
+    { "Kilowatt Hours": false },
+    { Cost: false }
+  ]);
 
-  const filteredByZoomRange = filterBy(chartData, dateRange, defaultRange)
+  const filteredByZoomRange = filterBy(chartData, dateRange, defaultRange);
 
   // We need to get the HTML string version of these icons since ApexCharts doesn't take in custom React components.
   // Why, you might ask? Don't ask me, ask ApexCharts.
-  const GetAppIconHTML = renderToStaticMarkup(<GetApp />)
-  const PanToolIconHTML = renderToStaticMarkup(<PanTool />)
-  const RotateLeftIconHTML = renderToStaticMarkup(<RotateLeft />)
-  const ZoomInIconHTML = renderToStaticMarkup(<ZoomIn />)
+  const GetAppIconHTML = renderToStaticMarkup(<GetApp />);
+  const PanToolIconHTML = renderToStaticMarkup(<PanTool />);
+  const RotateLeftIconHTML = renderToStaticMarkup(<RotateLeft />);
+  const ZoomInIconHTML = renderToStaticMarkup(<ZoomIn />);
 
-  const cloudEstimationData = sumServiceTotals(filteredByZoomRange)
-  const co2SeriesData = cloudEstimationData.co2Series
-  const kilowattHoursSeriesData = cloudEstimationData.kilowattHoursSeries
-  const costSeriesData = cloudEstimationData.costSeries
-  const maxCO2e = getMaxOfDataSeries(co2SeriesData)
-  const maxKilowattHours = getMaxOfDataSeries(kilowattHoursSeriesData)
-  const maxCost = getMaxOfDataSeries(costSeriesData)
+  const cloudEstimationData = sumServiceTotals(filteredByZoomRange);
+  const co2SeriesData = cloudEstimationData.co2Series;
+  const kilowattHoursSeriesData = cloudEstimationData.kilowattHoursSeries;
+  const costSeriesData = cloudEstimationData.costSeries;
+  const maxCO2e = getMaxOfDataSeries(co2SeriesData);
+  const maxKilowattHours = getMaxOfDataSeries(kilowattHoursSeriesData);
+  const maxCost = getMaxOfDataSeries(costSeriesData);
 
-  const grouping = data[0]?.groupBy || 'day'
+  const grouping = data[0]?.groupBy || "day";
   const dateFormat = {
-    day: 'MMM DD, YYYY',
-    week: '[Week] w, MMM',
-    month: 'MMM YYYY',
-    quarter: 'Qo [Quarter] YYYY',
-    year: 'YYYY',
-  }
+    day: "MMM DD, YYYY",
+    week: "[Week] w, MMM",
+    month: "MMM YYYY",
+    quarter: "Qo [Quarter] YYYY",
+    year: "YYYY"
+  };
 
   useEffect(() => {
-    const newSortedData = sortByDate(data)
+    const newSortedData = sortByDate(data);
     const min = newSortedData[0]?.timestamp
       ? new Date(newSortedData[0]?.timestamp)
-      : null
-    const endDate = new Date(newSortedData[newSortedData.length - 1]?.timestamp)
+      : null;
+    const endDate = new Date(
+      newSortedData[newSortedData.length - 1]?.timestamp
+    );
     const max = endDate
       ? moment(endDate)
           .add(1, `${grouping}s` as unitOfTime.DurationConstructor)
           .toDate()
-      : null
+      : null;
     const newDefaultRange = {
       min,
-      max,
-    }
+      max
+    };
 
-    if (!equals(chartData, newSortedData)) setChartData(newSortedData)
+    if (!equals(chartData, newSortedData)) setChartData(newSortedData);
     if (
       newDefaultRange.min instanceof Date &&
       newDefaultRange.max instanceof Date
     ) {
       if (!equals(defaultRange, newDefaultRange)) {
-        setDateRange(newDefaultRange)
-        setDefaultRange(newDefaultRange)
+        setDateRange(newDefaultRange);
+        setDefaultRange(newDefaultRange);
       }
     }
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
-    ApexCharts.exec('lineChart', 'updateSeries', [
+    ApexCharts.exec("lineChart", "updateSeries", [
       {
-        name: 'CO2e',
-        data: co2SeriesData,
+        name: "CO2e",
+        data: co2SeriesData
       },
       {
-        name: 'Kilowatt Hours',
-        data: kilowattHoursSeriesData,
+        name: "Kilowatt Hours",
+        data: kilowattHoursSeriesData
       },
       {
-        name: 'Cost',
-        data: costSeriesData,
-      },
-    ])
+        name: "Cost",
+        data: costSeriesData
+      }
+    ]);
 
-    ApexCharts.exec('lineChart', 'updateOptions', [
+    ApexCharts.exec("lineChart", "updateOptions", [
       {
         xaxis: {
-          category: global.labels,
-        },
-      },
-    ])
+          category: global.labels
+        }
+      }
+    ]);
 
     toggledSeries.forEach((legendToggle: LegendToggle) => {
-      const [seriesKey, toggleValue] = Object.entries(legendToggle)[0]
+      const [seriesKey, toggleValue] = Object.entries(legendToggle)[0];
       toggleValue
-        ? ApexCharts.exec('lineChart', 'showSeries', [seriesKey])
-        : ApexCharts.exec('lineChart', 'hideSeries', [seriesKey])
-    })
-  }, [co2SeriesData, kilowattHoursSeriesData, costSeriesData, toggledSeries])
+        ? ApexCharts.exec("lineChart", "showSeries", [seriesKey])
+        : ApexCharts.exec("lineChart", "hideSeries", [seriesKey]);
+    });
+  }, [co2SeriesData, kilowattHoursSeriesData, costSeriesData, toggledSeries]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const options: any = {
     markers: {
-      size: 5,
+      size: 5
     },
     chart: {
       events: {
         beforeZoom: (chart: unknown, { xaxis }: { xaxis: DateRange }) => {
-          const newFilteredData = filterBy(data, xaxis, defaultRange)
+          const newFilteredData = filterBy(data, xaxis, defaultRange);
 
           if (newFilteredData.length >= 2) {
-            setDateRange(xaxis)
+            setDateRange(xaxis);
             return {
-              xaxis,
-            }
+              xaxis
+            };
           }
           return {
-            dateRange,
-          }
+            dateRange
+          };
         },
         beforeResetZoom: () => {
-          setDateRange(defaultRange)
+          setDateRange(defaultRange);
         },
         legendClick: (chart: unknown, seriesIndex: number) => {
           const [seriesKey, toggledValue] = Object.entries(
-            toggledSeries[seriesIndex],
-          )[0]
+            toggledSeries[seriesIndex]
+          )[0];
           const toggleCheck = toggledSeries.filter(
-            (series) => !!Object.values(series)[0],
-          )
-          const newToggledSeries = [...toggledSeries]
+            (series) => !!Object.values(series)[0]
+          );
+          const newToggledSeries = [...toggledSeries];
           newToggledSeries[seriesIndex] = {
-            [seriesKey]: !toggledValue,
-          }
-          setToggledSeries(newToggledSeries)
+            [seriesKey]: !toggledValue
+          };
+          setToggledSeries(newToggledSeries);
           if (
             toggleCheck.length === 1 &&
             Object.keys(toggleCheck[0])[0] === seriesKey
           )
-            setToggledSeries(toggledSeries)
-        },
+            setToggledSeries(toggledSeries);
+        }
       },
-      id: 'lineChart',
+      id: "lineChart",
       background: theme.palette.background.paper,
       toolbar: {
         tools: {
@@ -178,31 +183,31 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           zoomin: false,
           zoomout: false,
           pan: PanToolIconHTML,
-          reset: RotateLeftIconHTML,
-        },
-      },
+          reset: RotateLeftIconHTML
+        }
+      }
     },
     colors: [blue, yellow, green],
-    height: '500px',
+    height: "500px",
     series: [
       {
-        name: 'CO2e',
-        data: co2SeriesData,
+        name: "CO2e",
+        data: co2SeriesData
       },
       {
-        name: 'Kilowatt Hours',
-        data: kilowattHoursSeriesData,
+        name: "Kilowatt Hours",
+        data: kilowattHoursSeriesData
       },
       {
-        name: 'Cost',
-        data: costSeriesData,
-      },
+        name: "Cost",
+        data: costSeriesData
+      }
     ],
     stroke: {
-      width: 1,
+      width: 1
     },
     theme: {
-      mode: theme.palette.type,
+      mode: theme.palette.type
     },
     tooltip: {
       shared: true,
@@ -211,80 +216,80 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           <CustomTooltip
             dataPoint={co2SeriesData[dataPointIndex]}
             grouping={grouping}
-          />,
-        )
-      },
+          />
+        );
+      }
     },
     title: {
-      text: 'Cloud Usage',
+      text: "Cloud Usage",
       offsetY: -8,
       style: {
-        fontSize: '24px',
-      },
+        fontSize: "24px"
+      }
     },
     xaxis: {
-      type: 'category',
-      tickAmount: 'dataPoints',
+      type: "category",
+      tickAmount: "dataPoints",
       title: {
-        text: '',
+        text: "",
         offsetY: 18,
         style: {
-          fontSize: '15px',
-        },
+          fontSize: "15px"
+        }
       },
       labels: {
         formatter: function (val) {
-          return moment(val).add(1, `d`).format(dateFormat[grouping])
+          return moment(val).add(1, `d`).format(dateFormat[grouping]);
         },
         style: {
-          display: 'contents !important',
-        },
-      },
+          display: "contents !important"
+        }
+      }
     },
     yaxis: [
       {
         max: 1.1 * maxCO2e,
         title: {
-          text: 'CO2e (metric tons)',
+          text: "CO2e (metric tons)",
           offsetX: -8,
           style: {
-            fontSize: '15px',
-          },
+            fontSize: "15px"
+          }
         },
         tickAmount: 10,
-        decimalsInFloat: 3,
+        decimalsInFloat: 3
       },
       {
         max: 1.1 * maxKilowattHours,
         title: {
-          text: 'Kilowatt Hours (kWh)',
+          text: "Kilowatt Hours (kWh)",
           opposite: -8,
           style: {
-            fontSize: '15px',
-            color: yellow,
-          },
+            fontSize: "15px",
+            color: yellow
+          }
         },
         tickAmount: 10,
         decimalsInFloat: 2,
         opposite: true,
         axisBorder: {
           show: true,
-          color: yellow,
+          color: yellow
         },
         axisTicks: {
-          show: false,
+          show: false
         },
-        showAlways: false,
+        showAlways: false
       },
       {
         max: 1.1 * maxCost,
         title: {
-          text: 'Cost ($)',
+          text: "Cost ($)",
           offsetX: 6,
           style: {
-            fontSize: '15px',
-            color: green,
-          },
+            fontSize: "15px",
+            color: green
+          }
         },
         tickAmount: 10,
         decimalsInFloat: 2,
@@ -292,21 +297,21 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
         axisBorder: {
           show: true,
           color: green,
-          offsetX: -5,
+          offsetX: -5
         },
         axisTicks: {
-          show: false,
+          show: false
         },
-        showAlways: false,
-      },
+        showAlways: false
+      }
     ],
     grid: {
       padding: {
         bottom: +15,
-        right: +20,
-      },
-    },
-  }
+        right: +20
+      }
+    }
+  };
 
   return (
     <Chart
@@ -316,7 +321,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
       type="line"
       height={options.height}
     />
-  )
-}
+  );
+};
 
-export default ApexLineChart
+export default ApexLineChart;

@@ -2,8 +2,8 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import styled from 'styled-components'
-import { Theme, withTheme } from '@material-ui/core'
+import styled from "styled-components";
+import { Theme, withTheme } from "@material-ui/core";
 
 const StyleWrapper = withTheme(styled.div`
   ${({ theme }: { theme: Theme }) => `
@@ -16,9 +16,9 @@ const StyleWrapper = withTheme(styled.div`
     // https://github.com/mui-org/material-ui/blob/master/packages/material-ui/src/OutlinedInput/OutlinedInput.js#L10
     .DateRangePickerInput__withBorder {
       border: 1px solid ${
-        theme.palette.type === 'light'
-          ? 'rgba(0, 0, 0, 0.23)'
-          : 'rgba(255, 255, 255, 0.23)'
+        theme.palette.type === "light"
+          ? "rgba(0, 0, 0, 0.23)"
+          : "rgba(255, 255, 255, 0.23)"
       };
     }
     .DateInput {
@@ -114,6 +114,6 @@ const StyleWrapper = withTheme(styled.div`
       border-right: 33px solid ${theme.palette.primary.main}
     }
   `}
-`)
+`);
 
-export default StyleWrapper
+export default StyleWrapper;

@@ -2,15 +2,15 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
-import React, { ReactElement } from 'react'
-import { NavLink } from 'react-router-dom'
-import clsx from 'clsx'
-import useStyles from './headerBarStyles'
-import logo from './ccf_logo.png'
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import React, { ReactElement } from "react";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
+import useStyles from "./headerBarStyles";
+import logo from "./ccf_logo.png";
 
 const HeaderBar = (): ReactElement => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <AppBar
@@ -23,7 +23,7 @@ const HeaderBar = (): ReactElement => {
         <NavLink to="/" className={classes.title}>
           <img
             src={logo}
-            alt={'Cloud Carbon Footprint Logo'}
+            alt={"Cloud Carbon Footprint Logo"}
             className={classes.logo}
           />
           <Typography component="h1" variant="h5">
@@ -38,7 +38,7 @@ const HeaderBar = (): ReactElement => {
         </NavLink>
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
 
-export default HeaderBar
+export default HeaderBar;

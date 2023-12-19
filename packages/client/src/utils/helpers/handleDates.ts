@@ -2,13 +2,13 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import moment, { Moment, unitOfTime } from 'moment'
-import { ClientConfig } from '../../Config'
-import loadConfig from '../../ConfigLoader'
-import { ForecastDetails } from '../../pages/RecommendationsPage/RecommendationsTable/Forecast/Forecast'
+import moment, { Moment, unitOfTime } from "moment";
+import { ClientConfig } from "../../Config";
+import loadConfig from "../../ConfigLoader";
+import { ForecastDetails } from "../../pages/RecommendationsPage/RecommendationsTable/Forecast/Forecast";
 
 interface dateProps {
-  config?: ClientConfig
+  config?: ClientConfig;
 }
 
 const groupByAmount = {
@@ -16,68 +16,71 @@ const groupByAmount = {
   week: 4,
   month: 1,
   quarter: 1,
-  year: 1,
-}
+  year: 1
+};
 
 export const getEmissionDateRange = ({ config = loadConfig() }: dateProps) => {
-  const dateRangeType: string = config.DATE_RANGE.TYPE
-  const dateRangeValue: string = config.DATE_RANGE.VALUE
+  const dateRangeType: string = config.DATE_RANGE.TYPE;
+  const dateRangeValue: string = config.DATE_RANGE.VALUE;
 
   let endDate: moment.Moment = moment
     .utc()
-    .subtract(config.MINIMAL_DATE_AGE, 'days')
+    .subtract(config.MINIMAL_DATE_AGE, "days");
   if (config.END_DATE) {
-    endDate = moment.utc(config.END_DATE)
+    endDate = moment.utc(config.END_DATE);
   }
 
-  let startDate: moment.Moment
+  let startDate: moment.Moment;
   if (config.PREVIOUS_YEAR_OF_USAGE) {
-    startDate = moment.utc(Date.UTC(endDate.year() - 1, 0, 1, 0, 0, 0, 0))
+    startDate = moment.utc(Date.UTC(endDate.year() - 1, 0, 1, 0, 0, 0, 0));
   } else if (config.START_DATE) {
-    startDate = moment.utc(config.START_DATE)
+    startDate = moment.utc(config.START_DATE);
   } else {
     startDate = moment
       .utc()
-      .subtract(dateRangeValue, dateRangeType as unitOfTime.DurationConstructor)
+      .subtract(
+        dateRangeValue,
+        dateRangeType as unitOfTime.DurationConstructor
+      );
   }
 
   return {
     start: startDate,
-    end: endDate,
-  }
-}
+    end: endDate
+  };
+};
 
-export const checkFootprintDates = (data, groupBy = 'day'): ForecastDetails => {
+export const checkFootprintDates = (data, groupBy = "day"): ForecastDetails => {
   const lastMonth = [...new Array(groupByAmount[groupBy])].map((i, n) =>
     moment
       .utc()
       .startOf(groupBy as moment.unitOfTime.StartOf)
-      .subtract(n, `${groupBy}s` as unitOfTime.DurationConstructor),
-  )
+      .subtract(n, `${groupBy}s` as unitOfTime.DurationConstructor)
+  );
 
-  const footprintDates = []
+  const footprintDates = [];
   data?.map((data) => {
     footprintDates.push(
-      moment.utc(data.timestamp).startOf(groupBy as moment.unitOfTime.StartOf),
-    )
-  })
+      moment.utc(data.timestamp).startOf(groupBy as moment.unitOfTime.StartOf)
+    );
+  });
 
   const missingDates: Moment[] = lastMonth.filter((a) => {
     const index = footprintDates.findIndex((date: string) =>
-      moment.utc(date).isSame(a),
-    )
-    return index < 0
-  })
+      moment.utc(date).isSame(a)
+    );
+    return index < 0;
+  });
 
   return {
     missingDates,
-    groupBy,
-  }
-}
+    groupBy
+  };
+};
 
 export const checkIfAllDatesExistForForecast = ({ missingDates, groupBy }) =>
-  groupByAmount[groupBy] == missingDates.length
+  groupByAmount[groupBy] == missingDates.length;
 
-export const sliceFootprintDataByLastMonth = (data, groupBy = 'day') => {
-  return data?.slice(data.length - groupByAmount[groupBy])
-}
+export const sliceFootprintDataByLastMonth = (data, groupBy = "day") => {
+  return data?.slice(data.length - groupByAmount[groupBy]);
+};

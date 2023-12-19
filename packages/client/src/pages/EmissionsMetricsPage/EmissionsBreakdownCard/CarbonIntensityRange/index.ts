@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './CarbonIntensityRange'
+export { default } from "./CarbonIntensityRange";

@@ -2,27 +2,27 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { OptionChooser } from '../../../../../common/FilterBar/utils/OptionChooser'
+import { OptionChooser } from "../../../../../common/FilterBar/utils/OptionChooser";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions,
-} from '../../../../../Types'
-import { DropdownSelections } from '../../../../../common/FilterBar/utils/FiltersUtil'
+  FilterOptions
+} from "../../../../../Types";
+import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
 
 export class RecommendationTypeChooser extends OptionChooser {
   constructor(
     selections: DropdownOption[],
     oldSelections: DropdownSelections,
-    filterOptions: FilterOptions,
+    filterOptions: FilterOptions
   ) {
     super(
       DropdownFilterOptions.RECOMMENDATION_TYPES,
       filterOptions.recommendationTypes,
       selections,
       oldSelections,
-      filterOptions,
-    )
+      filterOptions
+    );
 
     this.choosers = {
       [DropdownFilterOptions.RECOMMENDATION_TYPES]: () =>
@@ -31,7 +31,7 @@ export class RecommendationTypeChooser extends OptionChooser {
       [DropdownFilterOptions.ACCOUNTS]: () =>
         this.chooseDropdownFilterOption(DropdownFilterOptions.ACCOUNTS),
       [DropdownFilterOptions.REGIONS]: () =>
-        this.chooseDropdownFilterOption(DropdownFilterOptions.REGIONS),
-    }
+        this.chooseDropdownFilterOption(DropdownFilterOptions.REGIONS)
+    };
   }
 }

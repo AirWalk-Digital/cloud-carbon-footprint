@@ -6,74 +6,74 @@ import React, {
   useState,
   useEffect,
   PropsWithChildren,
-  ReactElement,
-} from 'react'
+  ReactElement
+} from "react";
 import {
   ChevronLeft,
   ChevronRight,
   FirstPage,
-  LastPage,
-} from '@material-ui/icons'
-import { IconButton } from '@material-ui/core'
-import { Page } from '../../../../Types'
-import useStyles from './paginationStyles'
+  LastPage
+} from "@material-ui/icons";
+import { IconButton } from "@material-ui/core";
+import { Page } from "../../../../Types";
+import useStyles from "./paginationStyles";
 
 interface UsePaginateData<T> {
-  paginatedData: T[][]
-  totalPages: number
+  paginatedData: T[][];
+  totalPages: number;
 }
 
 interface PaginateData<T> {
-  data: T[]
-  pageSize: number
+  data: T[];
+  pageSize: number;
 }
 
 interface PaginationProps<T> extends PaginateData<T> {
-  handlePage: (page: Page<T>) => void
+  handlePage: (page: Page<T>) => void;
 }
 
 const usePaginateData: <T>(
   data: T[],
-  pageSize: number,
+  pageSize: number
 ) => UsePaginateData<T> = (data, pageSize) => {
-  const paginatedData = []
-  const newEntries = [...data]
+  const paginatedData = [];
+  const newEntries = [...data];
   while (newEntries.length > 0) {
-    const paginatedSubData = newEntries.splice(0, pageSize)
-    paginatedData.push(paginatedSubData)
+    const paginatedSubData = newEntries.splice(0, pageSize);
+    paginatedData.push(paginatedSubData);
   }
   return {
     paginatedData,
-    totalPages: paginatedData.length,
-  }
-}
+    totalPages: paginatedData.length
+  };
+};
 
 const Pagination: <T>(
-  props: PropsWithChildren<PaginationProps<T>>,
+  props: PropsWithChildren<PaginationProps<T>>
 ) => ReactElement = ({ data, pageSize, handlePage }) => {
-  const { paginationContainer, paginationLabel } = useStyles()
-  const [page, setPage] = useState(0)
+  const { paginationContainer, paginationLabel } = useStyles();
+  const [page, setPage] = useState(0);
   const { paginatedData, totalPages } = usePaginateData<typeof data[0]>(
     data,
-    pageSize,
-  )
-  const lastPage = paginatedData.length - 1
+    pageSize
+  );
+  const lastPage = paginatedData.length - 1;
   const visibleRows = `${page * pageSize + 1} - ${
     page * pageSize + paginatedData[page]?.length
-  }`
+  }`;
 
   useEffect(() => {
-    handlePage({ data: paginatedData[0] || [], page: 0 })
-    setPage(0)
-  }, [JSON.stringify(data)])
+    handlePage({ data: paginatedData[0] || [], page: 0 });
+    setPage(0);
+  }, [JSON.stringify(data)]);
 
   const onPageChange = (newPage: number) => {
-    setPage(newPage)
-    handlePage({ data: paginatedData[newPage], page: newPage })
-  }
+    setPage(newPage);
+    handlePage({ data: paginatedData[newPage], page: newPage });
+  };
 
   if (data.length === 0) {
-    return <div aria-label="no-pagination-data" />
+    return <div aria-label="no-pagination-data" />;
   }
 
   return (
@@ -118,7 +118,7 @@ const Pagination: <T>(
         <LastPage />
       </IconButton>
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

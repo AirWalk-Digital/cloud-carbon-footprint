@@ -2,41 +2,41 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import clsx from 'clsx'
-import { Close, Info } from '@material-ui/icons'
-import { Typography, Drawer, Divider, IconButton } from '@material-ui/core'
-import { SidePanelProps } from '../../Types'
-import useStyles from './sidePanelStyles'
+import React, { FunctionComponent, useEffect, useState } from "react";
+import clsx from "clsx";
+import { Close, Info } from "@material-ui/icons";
+import { Typography, Drawer, Divider, IconButton } from "@material-ui/core";
+import { SidePanelProps } from "../../Types";
+import useStyles from "./sidePanelStyles";
 
 const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
-  const classes = useStyles(props)
-  const [open, setOpen] = useState(false)
+  const classes = useStyles(props);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (props.defaultIsOpen) {
-      handleDrawerOpen()
+      handleDrawerOpen();
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (props.openOnChange && !open) {
-      setOpen(true)
+      setOpen(true);
     }
-  }, [props.openOnChange])
+  }, [props.openOnChange]);
 
   const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleDrawerClose = () => {
-    setOpen(false)
+    setOpen(false);
     if (props.onClose) {
-      props.onClose()
+      props.onClose();
     }
-  }
+  };
 
-  const drawerStatus = open ? 'open' : 'closed'
+  const drawerStatus = open ? "open" : "closed";
   return (
     <Drawer
       anchor="right"
@@ -44,13 +44,13 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
       id={`drawer-` + drawerStatus}
       className={clsx(classes.drawer, {
         [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
+        [classes.drawerClose]: !open
       })}
       classes={{
         paper: clsx({
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
+          [classes.drawerClose]: !open
+        })
       }}
     >
       <IconButton
@@ -59,7 +59,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
         onClick={handleDrawerOpen}
         edge="start"
         className={clsx(classes.infoButton, {
-          [classes.hide]: open,
+          [classes.hide]: open
         })}
         id="info-button"
       >
@@ -67,7 +67,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
       </IconButton>
       <div
         className={clsx(classes.toolbar, {
-          [classes.hide]: !open,
+          [classes.hide]: !open
         })}
       >
         <div
@@ -89,7 +89,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
         {props.children}
       </div>
     </Drawer>
-  )
-}
+  );
+};
 
-export default SidePanel
+export default SidePanel;

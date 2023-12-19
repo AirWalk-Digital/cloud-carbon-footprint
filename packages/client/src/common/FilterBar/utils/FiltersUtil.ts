@@ -2,41 +2,41 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { DropdownFilterOptions, DropdownOption } from '../../../Types'
-import { OptionChooser } from './OptionChooser'
+import { DropdownFilterOptions, DropdownOption } from "../../../Types";
+import { OptionChooser } from "./OptionChooser";
 
 export type DropdownSelections = {
-  [key in DropdownFilterOptions]?: DropdownOption[]
-}
+  [key in DropdownFilterOptions]?: DropdownOption[];
+};
 
 export function handleDropdownSelections(
-  chooser: OptionChooser,
+  chooser: OptionChooser
 ): DropdownSelections {
-  return chooser.choose()
+  return chooser.choose();
 }
 
 export function numSelectedLabel(
   length: number,
   totalLength: number,
-  type: string,
+  type: string
 ): string {
-  const lengthWithoutAllOption = totalLength - 1
+  const lengthWithoutAllOption = totalLength - 1;
   if (length === totalLength) {
-    return `${type}: ${lengthWithoutAllOption} of ${lengthWithoutAllOption}`
+    return `${type}: ${lengthWithoutAllOption} of ${lengthWithoutAllOption}`;
   } else {
-    return `${type}: ${length} of ${lengthWithoutAllOption}`
+    return `${type}: ${length} of ${lengthWithoutAllOption}`;
   }
 }
 
 export function optionIsInDropdownOptions(
   comparingDropdownOptions: DropdownOption[],
-  dropdownOption: DropdownOption,
+  dropdownOption: DropdownOption
 ): boolean {
-  let isWithinComparingDropdownOption = false
+  let isWithinComparingDropdownOption = false;
   comparingDropdownOptions.forEach((comparingDropdownOption) => {
     if (comparingDropdownOption.key === dropdownOption.key) {
-      isWithinComparingDropdownOption = true
+      isWithinComparingDropdownOption = true;
     }
-  })
-  return isWithinComparingDropdownOption
+  });
+  return isWithinComparingDropdownOption;
 }

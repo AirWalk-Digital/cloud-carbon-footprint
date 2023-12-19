@@ -1,57 +1,57 @@
 /*
  * © 2021 Thoughtworks, Inc.
  */
-import axios from 'axios'
-import moment from 'moment'
-import { renderHook } from '@testing-library/react-hooks'
-import { EstimationResult, GroupBy } from '@cloud-carbon-footprint/common'
-import useRemoteFootprintService from './FootprintServiceHook'
+import axios from "axios";
+import moment from "moment";
+import { renderHook } from "@testing-library/react-hooks";
+import { EstimationResult, GroupBy } from "@cloud-carbon-footprint/common";
+import useRemoteFootprintService from "./FootprintServiceHook";
 
-jest.mock('axios')
-const axiosMocked = axios as jest.Mocked<typeof axios>
+jest.mock("axios");
+const axiosMocked = axios as jest.Mocked<typeof axios>;
 const mockUseNavigate = jest.fn((args) =>
-  console.log('history push args', args),
-)
+  console.log("history push args", args)
+);
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => mockUseNavigate,
-}))
+jest.mock("react-router-dom", () => ({
+  useNavigate: () => mockUseNavigate
+}));
 
-const startDate = moment.utc('2020-08-26')
-const endDate = moment.utc('2020-08-27')
+const startDate = moment.utc("2020-08-26");
+const endDate = moment.utc("2020-08-27");
 const mockEstimationResult: EstimationResult = {
-  timestamp: moment.utc('2020-08-27').toDate(),
+  timestamp: moment.utc("2020-08-27").toDate(),
   serviceEstimates: [],
-  groupBy: GroupBy.day,
-}
-const ignoreCache = true
-const baseUrl = '/api'
-const minLoadTimeMs = 10
-const groupBy = 'day'
+  groupBy: GroupBy.day
+};
+const ignoreCache = true;
+const baseUrl = "/api";
+const minLoadTimeMs = 10;
+const groupBy = "day";
 
-describe('FootprintServiceHook', () => {
-  describe('when baseUrl is null', () => {
-    it('should do nothing', () => {
+describe("FootprintServiceHook", () => {
+  describe("when baseUrl is null", () => {
+    it("should do nothing", () => {
       const { result } = renderHook(() =>
         useRemoteFootprintService({
           baseUrl: null,
           startDate,
-          endDate,
-        }),
-      )
+          endDate
+        })
+      );
 
-      expect(axiosMocked.get).not.toHaveBeenCalled()
+      expect(axiosMocked.get).not.toHaveBeenCalled();
       expect(result.current).toEqual({
         data: [],
         error: null,
-        loading: false,
-      })
-    })
-  })
+        loading: false
+      });
+    });
+  });
 
-  describe('when baseUrl is provided', () => {
-    it('should send request to /api endpoint', async () => {
-      axiosMocked.get.mockResolvedValue({ data: [mockEstimationResult] })
+  describe("when baseUrl is provided", () => {
+    it("should send request to /api endpoint", async () => {
+      axiosMocked.get.mockResolvedValue({ data: [mockEstimationResult] });
 
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteFootprintService({
@@ -60,77 +60,77 @@ describe('FootprintServiceHook', () => {
           endDate,
           ignoreCache,
           minLoadTimeMs,
-          groupBy,
-        }),
-      )
+          groupBy
+        })
+      );
 
-      expect(axiosMocked.get).toBeCalledWith('/api/footprint', {
+      expect(axiosMocked.get).toBeCalledWith("/api/footprint", {
         params: {
-          end: '2020-08-27',
-          start: '2020-08-26',
+          end: "2020-08-27",
+          start: "2020-08-26",
           ignoreCache,
-          groupBy: 'day',
-          skip: 0,
-        },
-      })
+          groupBy: "day",
+          skip: 0
+        }
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [mockEstimationResult],
         loading: true,
-        error: null,
-      })
+        error: null
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [mockEstimationResult],
         loading: false,
-        error: null,
-      })
-    })
+        error: null
+      });
+    });
 
-    describe('when response is an error', () => {
+    describe("when response is an error", () => {
       const error = {
-        message: 'Axios generated error message',
+        message: "Axios generated error message",
         response: {
           status: 500,
-          statusText: 'Internal Service Error',
-        },
-      }
+          statusText: "Internal Service Error"
+        }
+      };
 
       beforeEach(() => {
-        axiosMocked.get.mockRejectedValue(error)
-      })
+        axiosMocked.get.mockRejectedValue(error);
+      });
 
-      it('should return error', async () => {
+      it("should return error", async () => {
         const { result, waitForNextUpdate } = renderHook(() =>
           useRemoteFootprintService({
             baseUrl,
             initial: [],
             startDate,
             endDate,
-            minLoadTimeMs,
-          }),
-        )
+            minLoadTimeMs
+          })
+        );
 
-        await waitForNextUpdate()
+        await waitForNextUpdate();
         expect(result.current).toEqual({
           data: [],
           loading: true,
-          error,
-        })
+          error
+        });
 
-        await waitForNextUpdate()
+        await waitForNextUpdate();
         expect(result.current).toEqual({
           data: [],
           loading: false,
-          error,
-        })
-      })
+          error
+        });
+      });
 
-      describe('when error handler is provided', () => {
-        it('should invoke error handler with error thrown by axios', async () => {
-          const onApiError = jest.fn()
+      describe("when error handler is provided", () => {
+        it("should invoke error handler with error thrown by axios", async () => {
+          const onApiError = jest.fn();
 
           const { result, waitForNextUpdate } = renderHook(() =>
             useRemoteFootprintService({
@@ -139,41 +139,41 @@ describe('FootprintServiceHook', () => {
               startDate,
               endDate,
               onApiError,
-              minLoadTimeMs,
-            }),
-          )
+              minLoadTimeMs
+            })
+          );
 
-          await waitForNextUpdate()
+          await waitForNextUpdate();
           expect(result.current).toEqual({
             data: [],
             loading: true,
-            error,
-          })
-          expect(onApiError).toHaveBeenCalledWith(error)
+            error
+          });
+          expect(onApiError).toHaveBeenCalledWith(error);
 
-          await waitForNextUpdate()
+          await waitForNextUpdate();
 
           expect(result.current).toEqual({
             data: [],
             loading: false,
-            error,
-          })
-        })
-      })
-    })
-  })
+            error
+          });
+        });
+      });
+    });
+  });
 
-  describe('when data is paginated', () => {
-    it('should send initial request to /api endpoint with limit and skip value', async () => {
+  describe("when data is paginated", () => {
+    it("should send initial request to /api endpoint with limit and skip value", async () => {
       const mockEstimate: EstimationResult = {
-        timestamp: moment.utc('2022-02-05').toDate(),
+        timestamp: moment.utc("2022-02-05").toDate(),
         serviceEstimates: [],
-        groupBy: GroupBy.day,
-      }
-      axiosMocked.get.mockResolvedValue({ data: [mockEstimate] })
+        groupBy: GroupBy.day
+      };
+      axiosMocked.get.mockResolvedValue({ data: [mockEstimate] });
 
-      const start = moment.utc('2022-02-01')
-      const end = moment.utc('2022-02-05')
+      const start = moment.utc("2022-02-01");
+      const end = moment.utc("2022-02-05");
 
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteFootprintService({
@@ -183,71 +183,71 @@ describe('FootprintServiceHook', () => {
           ignoreCache,
           minLoadTimeMs,
           groupBy: GroupBy.day,
-          limit: 90,
-        }),
-      )
+          limit: 90
+        })
+      );
 
-      expect(axiosMocked.get).toBeCalledWith('/api/footprint', {
+      expect(axiosMocked.get).toBeCalledWith("/api/footprint", {
         params: {
-          end: '2022-02-05',
-          start: '2022-02-01',
+          end: "2022-02-05",
+          start: "2022-02-01",
           ignoreCache,
-          groupBy: 'day',
+          groupBy: "day",
           limit: 90,
-          skip: 0,
-        },
-      })
+          skip: 0
+        }
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [mockEstimate],
         loading: true,
-        error: null,
-      })
+        error: null
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [mockEstimate],
         loading: false,
-        error: null,
-      })
-    })
-    it('should make more requests to /api endpoint if there is another page of estimates', async () => {
+        error: null
+      });
+    });
+    it("should make more requests to /api endpoint if there is another page of estimates", async () => {
       const mockEstimate: EstimationResult = {
-        timestamp: moment.utc('2022-02-01').toDate(),
+        timestamp: moment.utc("2022-02-01").toDate(),
         serviceEstimates: [
           {
-            cloudProvider: 'AWS',
-            accountId: 'accountId',
-            accountName: 'accountName',
-            serviceName: 'serviceName',
+            cloudProvider: "AWS",
+            accountId: "accountId",
+            accountName: "accountName",
+            serviceName: "serviceName",
             cost: 0,
             kilowattHours: 0,
-            co2e: 0,
-          },
+            co2e: 0
+          }
         ],
-        groupBy: GroupBy.day,
-      }
+        groupBy: GroupBy.day
+      };
       const mockEstimateTwo: EstimationResult = {
-        timestamp: moment.utc('2022-02-01').toDate(),
+        timestamp: moment.utc("2022-02-01").toDate(),
         serviceEstimates: [
           {
-            cloudProvider: 'GCP',
-            accountId: 'accountId',
-            accountName: 'accountName',
-            serviceName: 'serviceName',
+            cloudProvider: "GCP",
+            accountId: "accountId",
+            accountName: "accountName",
+            serviceName: "serviceName",
             cost: 0,
             kilowattHours: 0,
-            co2e: 0,
-          },
+            co2e: 0
+          }
         ],
-        groupBy: GroupBy.day,
-      }
+        groupBy: GroupBy.day
+      };
 
-      axiosMocked.get.mockResolvedValueOnce({ data: [mockEstimate] })
+      axiosMocked.get.mockResolvedValueOnce({ data: [mockEstimate] });
 
-      const start = moment.utc('2022-02-01')
-      const end = moment.utc('2022-02-05')
+      const start = moment.utc("2022-02-01");
+      const end = moment.utc("2022-02-05");
 
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteFootprintService({
@@ -257,46 +257,46 @@ describe('FootprintServiceHook', () => {
           ignoreCache: false,
           minLoadTimeMs,
           groupBy: GroupBy.day,
-          limit: 1,
-        }),
-      )
+          limit: 1
+        })
+      );
 
-      expect(axiosMocked.get).toBeCalledWith('/api/footprint', {
+      expect(axiosMocked.get).toBeCalledWith("/api/footprint", {
         params: {
-          end: '2022-02-05',
-          start: '2022-02-01',
+          end: "2022-02-05",
+          start: "2022-02-01",
           ignoreCache: false,
-          groupBy: 'day',
+          groupBy: "day",
           limit: 1,
-          skip: 0,
-        },
-      })
+          skip: 0
+        }
+      });
 
       // Second call
-      axiosMocked.get.mockResolvedValueOnce({ data: [mockEstimateTwo] })
-      await waitForNextUpdate()
+      axiosMocked.get.mockResolvedValueOnce({ data: [mockEstimateTwo] });
+      await waitForNextUpdate();
 
-      expect(axiosMocked.get).toBeCalledWith('/api/footprint', {
+      expect(axiosMocked.get).toBeCalledWith("/api/footprint", {
         params: {
-          end: '2022-02-05',
-          start: '2022-02-01',
+          end: "2022-02-05",
+          start: "2022-02-01",
           ignoreCache: false,
-          groupBy: 'day',
+          groupBy: "day",
           limit: 1,
-          skip: 1,
-        },
-      })
+          skip: 1
+        }
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [mockEstimate],
         loading: false,
-        error: null,
-      })
-      expect(result.current.data[0].serviceEstimates.length).toEqual(2)
+        error: null
+      });
+      expect(result.current.data[0].serviceEstimates.length).toEqual(2);
       expect(result.current.data[0].serviceEstimates[1]).toEqual(
-        mockEstimateTwo.serviceEstimates[0],
-      )
-    })
-  })
-})
+        mockEstimateTwo.serviceEstimates[0]
+      );
+    });
+  });
+});

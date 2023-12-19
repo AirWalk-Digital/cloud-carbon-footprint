@@ -2,68 +2,68 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, ReactElement } from 'react'
-import { DropdownOption, FilterBarProps, FilterOptions } from '../../../Types'
+import React, { FunctionComponent, ReactElement } from "react";
+import { DropdownOption, FilterBarProps, FilterOptions } from "../../../Types";
 import {
   ALL_ACCOUNTS_DROPDOWN_OPTION,
   ALL_SERVICES_DROPDOWN_OPTION,
   buildAndOrderDropdownOptions,
-  CLOUD_PROVIDER_OPTIONS,
-} from '../../../common/FilterBar/utils/DropdownConstants'
-import FilterBar from '../../../common/FilterBar'
+  CLOUD_PROVIDER_OPTIONS
+} from "../../../common/FilterBar/utils/DropdownConstants";
+import FilterBar from "../../../common/FilterBar";
 import {
   AccountFilter,
   CloudProviderFilter,
   DateFilter,
   MonthFilter,
-  ServiceFilter,
-} from './Filters'
+  ServiceFilter
+} from "./Filters";
 
 const EmissionsFilterBar: FunctionComponent<FilterBarProps> = ({
   filters,
   setFilters,
-  filterOptions,
+  filterOptions
 }): ReactElement => {
   const getFilterOptions = (): FilterOptions => {
     const allAccountDropdownOptions = buildAndOrderDropdownOptions(
       filterOptions?.accounts,
-      [{ cloudProvider: '', key: 'string', name: 'string' }],
-    )
+      [{ cloudProvider: "", key: "string", name: "string" }]
+    );
     const accountOptions: DropdownOption[] = [
       ALL_ACCOUNTS_DROPDOWN_OPTION,
-      ...allAccountDropdownOptions,
-    ]
+      ...allAccountDropdownOptions
+    ];
 
     const allServiceDropdownOptions = buildAndOrderDropdownOptions(
       filterOptions?.services,
-      [{ key: '', name: '' }],
-    )
+      [{ key: "", name: "" }]
+    );
     const serviceOptions: DropdownOption[] = [
       ALL_SERVICES_DROPDOWN_OPTION,
-      ...allServiceDropdownOptions,
-    ]
+      ...allServiceDropdownOptions
+    ];
 
     return {
       accounts: accountOptions,
       services: serviceOptions,
-      cloudProviders: CLOUD_PROVIDER_OPTIONS,
-    }
-  }
+      cloudProviders: CLOUD_PROVIDER_OPTIONS
+    };
+  };
 
   const filterComponents = [
     CloudProviderFilter,
     AccountFilter,
     ServiceFilter,
     DateFilter,
-    MonthFilter,
-  ]
+    MonthFilter
+  ];
   const filterConfig = {
     filters,
     setFilters,
-    filterOptions: getFilterOptions(),
-  }
+    filterOptions: getFilterOptions()
+  };
 
-  return <FilterBar config={filterConfig} components={filterComponents} />
-}
+  return <FilterBar config={filterConfig} components={filterComponents} />;
+};
 
-export default EmissionsFilterBar
+export default EmissionsFilterBar;

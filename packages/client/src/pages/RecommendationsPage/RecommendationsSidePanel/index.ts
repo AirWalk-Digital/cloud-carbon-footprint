@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './RecommendationsSidePanel'
+export { default } from "./RecommendationsSidePanel";

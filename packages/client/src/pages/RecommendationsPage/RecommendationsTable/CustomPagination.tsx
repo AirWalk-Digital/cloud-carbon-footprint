@@ -5,23 +5,23 @@
 import {
   useGridApiContext,
   useGridState,
-  GridToolbarContainer,
-} from '@mui/x-data-grid'
-import Pagination from '@material-ui/lab/Pagination'
-import { Box, MenuItem, Select, Typography } from '@material-ui/core'
-import { FunctionComponent, ReactElement } from 'react'
-import useStyles from './recommendationsTableStyles'
+  GridToolbarContainer
+} from "@mui/x-data-grid";
+import Pagination from "@material-ui/lab/Pagination";
+import { Box, MenuItem, Select, Typography } from "@material-ui/core";
+import { FunctionComponent, ReactElement } from "react";
+import useStyles from "./recommendationsTableStyles";
 
 type CustomPaginationProps = {
-  handlePageSizeChange: (number) => void
-}
+  handlePageSizeChange: (number) => void;
+};
 
 const CustomPagination: FunctionComponent<CustomPaginationProps> = ({
-  handlePageSizeChange,
+  handlePageSizeChange
 }): ReactElement => {
-  const apiRef = useGridApiContext()
-  const [state] = useGridState(apiRef)
-  const classes = useStyles()
+  const apiRef = useGridApiContext();
+  const [state] = useGridState(apiRef);
+  const classes = useStyles();
 
   return (
     <GridToolbarContainer>
@@ -47,7 +47,7 @@ const CustomPagination: FunctionComponent<CustomPaginationProps> = ({
         onChange={(event, value) => apiRef.current.setPage(value - 1)}
       />
     </GridToolbarContainer>
-  )
-}
+  );
+};
 
-export default CustomPagination
+export default CustomPagination;

@@ -2,24 +2,24 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(({ spacing }) => ({
   boxContainer: {
-    padding: spacing(3, 10),
+    padding: spacing(3, 10)
   },
   loadingContainer: {
     padding: spacing(3, 10),
     marginTop: 62,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    justifyItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    justifyItems: "center"
   },
   pageContainer: {
-    height: '100%',
-    overflowY: 'scroll',
-  },
-}))
+    height: "100%",
+    overflowY: "scroll"
+  }
+}));
 
-export default useStyles
+export default useStyles;

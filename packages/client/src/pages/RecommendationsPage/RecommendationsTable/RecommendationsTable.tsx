@@ -7,113 +7,113 @@ import React, {
   ReactElement,
   SyntheticEvent,
   useEffect,
-  useState,
-} from 'react'
+  useState
+} from "react";
 import {
   DataGrid,
   GridCellParams,
   GridColDef,
   GridOverlay,
   GridRowParams,
-  MuiEvent,
-} from '@mui/x-data-grid'
+  MuiEvent
+} from "@mui/x-data-grid";
 import {
   RecommendationResult,
-  ServiceData,
-} from '@cloud-carbon-footprint/common'
-import { Typography } from '@material-ui/core'
-import DashboardCard from '../../../layout/DashboardCard'
-import useStyles from './recommendationsTableStyles'
-import DateRange from '../../../common/DateRange'
-import Tooltip from '../../../common/Tooltip'
-import SearchBar from '../SearchBar'
-import Forecast, { ForecastDetails } from './Forecast/Forecast'
-import CustomPagination from './CustomPagination'
+  ServiceData
+} from "@cloud-carbon-footprint/common";
+import { Typography } from "@material-ui/core";
+import DashboardCard from "../../../layout/DashboardCard";
+import useStyles from "./recommendationsTableStyles";
+import DateRange from "../../../common/DateRange";
+import Tooltip from "../../../common/Tooltip";
+import SearchBar from "../SearchBar";
+import Forecast, { ForecastDetails } from "./Forecast/Forecast";
+import CustomPagination from "./CustomPagination";
 import {
   tableFormatNearZero,
-  tableFormatRawCo2e,
-} from '../../../utils/helpers/transformData'
-import { Co2eUnit, RecommendationRow } from '../../../Types'
-import RecommendationsSidePanel from '../RecommendationsSidePanel'
-import { co2eUnitAbbreviation } from '../../../utils/helpers'
+  tableFormatRawCo2e
+} from "../../../utils/helpers/transformData";
+import { Co2eUnit, RecommendationRow } from "../../../Types";
+import RecommendationsSidePanel from "../RecommendationsSidePanel";
+import { co2eUnitAbbreviation } from "../../../utils/helpers";
 
 type RecommendationsTableProps = {
-  emissionsData: ServiceData[]
-  recommendations: RecommendationResult[]
-  co2eUnit: Co2eUnit
-  forecastDetails: ForecastDetails
-}
+  emissionsData: ServiceData[];
+  recommendations: RecommendationResult[];
+  co2eUnit: Co2eUnit;
+  forecastDetails: ForecastDetails;
+};
 
 const getColumns = (co2eUnit: Co2eUnit): GridColDef[] => [
   {
-    field: 'cloudProvider',
-    headerName: 'Cloud Provider',
-    width: 175,
+    field: "cloudProvider",
+    headerName: "Cloud Provider",
+    width: 175
   },
   {
-    field: 'accountName',
-    headerName: 'Account Name',
-    flex: 0.75,
+    field: "accountName",
+    headerName: "Account Name",
+    flex: 0.75
   },
   {
-    field: 'region',
-    headerName: 'Region',
-    flex: 0.5,
+    field: "region",
+    headerName: "Region",
+    flex: 0.5
   },
   {
-    field: 'recommendationType',
-    headerName: 'Recommendation Type',
-    flex: 0.75,
+    field: "recommendationType",
+    headerName: "Recommendation Type",
+    flex: 0.75
   },
   {
-    field: 'costSavings',
-    headerName: 'Potential Cost Savings ($)',
+    field: "costSavings",
+    headerName: "Potential Cost Savings ($)",
     flex: 0.75,
     renderCell: (params) => {
-      if (typeof params.value === 'number') {
-        return tableFormatNearZero(params.value)
+      if (typeof params.value === "number") {
+        return tableFormatNearZero(params.value);
       } else {
-        return '-'
+        return "-";
       }
-    },
+    }
   },
   {
-    field: 'co2eSavings',
+    field: "co2eSavings",
     headerName: `Potential Carbon Savings (${co2eUnitAbbreviation[co2eUnit]})`,
     renderCell: (params: GridCellParams) => {
-      if (typeof params.value === 'number') {
-        return tableFormatRawCo2e(co2eUnit, params.value)
+      if (typeof params.value === "number") {
+        return tableFormatRawCo2e(co2eUnit, params.value);
       } else {
-        return '-'
+        return "-";
       }
     },
-    flex: 0.75,
-  },
-]
+    flex: 0.75
+  }
+];
 
 const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
   emissionsData,
   recommendations,
   co2eUnit,
-  forecastDetails,
+  forecastDetails
 }): ReactElement => {
-  const [searchBarValue, setSearchBarValue] = useState('')
-  const [rows, setRows] = useState([])
+  const [searchBarValue, setSearchBarValue] = useState("");
+  const [rows, setRows] = useState([]);
   const initialPageState = {
     page: 0,
     pageSize: 25,
-    sortOrder: null,
-  }
-  const [pageState, setPageState] = useState(initialPageState)
+    sortOrder: null
+  };
+  const [pageState, setPageState] = useState(initialPageState);
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const handlePageSizeChange = (newPageSize: number) => {
-    setPageState({ ...pageState, pageSize: newPageSize })
-  }
+    setPageState({ ...pageState, pageSize: newPageSize });
+  };
 
   const createRecommendationRows = (
-    recommendations: RecommendationResult[],
+    recommendations: RecommendationResult[]
   ) => {
     if (recommendations) {
       const recommendationRows = recommendations.map(
@@ -122,90 +122,90 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
             ...recommendation,
             id: index,
             co2eUnit: co2eUnit,
-            co2eSavings: recommendation.co2eSavings,
-          }
+            co2eSavings: recommendation.co2eSavings
+          };
           // Replace any undefined values and round numbers to thousandth decimal
           Object.keys(recommendation).forEach((key) => {
-            recommendationRow[key] = recommendationRow[key] ?? '-'
-          })
-          return recommendationRow
-        },
-      )
-      setRows(recommendationRows)
+            recommendationRow[key] = recommendationRow[key] ?? "-";
+          });
+          return recommendationRow;
+        }
+      );
+      setRows(recommendationRows);
     }
-  }
+  };
 
   const resetToInitialPage = (initialPage = 0) => {
-    setPageState({ ...pageState, page: initialPage })
-  }
+    setPageState({ ...pageState, page: initialPage });
+  };
 
   const handleSearchBarChange = (value: string) => {
-    setSearchBarValue(value)
-    requestSearch(value)
-    resetToInitialPage()
-  }
+    setSearchBarValue(value);
+    requestSearch(value);
+    resetToInitialPage();
+  };
 
   const escapeRegExp = (value: string): string => {
-    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-  }
+    return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  };
 
   const requestSearch = (searchValue: string) => {
-    const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
+    const searchRegex = new RegExp(escapeRegExp(searchValue), "i");
     const fieldsToNotFilter = [
-      'resourceId',
-      'kilowattHourSavings',
-      'instanceName',
-      'accountId',
-      'recommendationDetail',
-    ]
+      "resourceId",
+      "kilowattHourSavings",
+      "instanceName",
+      "accountId",
+      "recommendationDetail"
+    ];
     const filteredRecommendations = recommendations.filter(
       (row: RecommendationResult) => {
         return Object.keys(row).some((field: string) => {
           if (!fieldsToNotFilter.includes(field)) {
-            let value = row[field]
-            if (field === 'co2eSavings') {
-              value = tableFormatRawCo2e(co2eUnit, value)
-            } else if (field === 'costSavings') {
-              value = tableFormatNearZero(value)
+            let value = row[field];
+            if (field === "co2eSavings") {
+              value = tableFormatRawCo2e(co2eUnit, value);
+            } else if (field === "costSavings") {
+              value = tableFormatNearZero(value);
             }
-            return searchRegex.test(value?.toString())
+            return searchRegex.test(value?.toString());
           }
-        })
-      },
-    )
-    createRecommendationRows(filteredRecommendations)
-  }
+        });
+      }
+    );
+    createRecommendationRows(filteredRecommendations);
+  };
 
   useEffect(() => {
-    requestSearch(searchBarValue)
-  }, [co2eUnit])
+    requestSearch(searchBarValue);
+  }, [co2eUnit]);
 
   useEffect(() => {
-    requestSearch(searchBarValue)
-    resetToInitialPage()
-  }, [recommendations])
+    requestSearch(searchBarValue);
+    resetToInitialPage();
+  }, [recommendations]);
 
   const tooltipMessage =
-    'Recommendations are based on cloud usage from the last 14 days, except for GCP CHANGE_MACHINE_TYPE which is from the last 8 days of usage. ' +
-    'Estimates marked with a dash (-) do not yet have an appropriate methodology to calculate the associated energy or carbon savings.'
+    "Recommendations are based on cloud usage from the last 14 days, except for GCP CHANGE_MACHINE_TYPE which is from the last 8 days of usage. " +
+    "Estimates marked with a dash (-) do not yet have an appropriate methodology to calculate the associated energy or carbon savings.";
 
   const customPaginationComponent = () => (
     <CustomPagination handlePageSizeChange={handlePageSizeChange} />
-  )
+  );
 
   const [selectedRecommendation, setSelectedRecommendation] =
-    useState<RecommendationRow>()
+    useState<RecommendationRow>();
 
   const handleRowClick = (
     params: GridRowParams,
-    _event: MuiEvent<SyntheticEvent>,
+    _event: MuiEvent<SyntheticEvent>
   ) => {
     if (selectedRecommendation && params.row.id === selectedRecommendation.id) {
-      setSelectedRecommendation(undefined)
+      setSelectedRecommendation(undefined);
     } else {
-      setSelectedRecommendation(params.row as RecommendationRow)
+      setSelectedRecommendation(params.row as RecommendationRow);
     }
-  }
+  };
 
   return (
     <>
@@ -237,7 +237,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                 <SearchBar
                   value={searchBarValue}
                   onChange={handleSearchBarChange}
-                  clearSearch={() => handleSearchBarChange('')}
+                  clearSearch={() => handleSearchBarChange("")}
                 />
               </div>
               <DataGrid
@@ -248,7 +248,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                 hideFooterSelectedRowCount={true}
                 classes={{
                   cell: classes.cell,
-                  row: classes.row,
+                  row: classes.row
                 }}
                 onRowClick={handleRowClick}
                 disableColumnFilter
@@ -262,7 +262,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                       to get started. (Try adding accounts, regions or
                       recommendation types)
                     </GridOverlay>
-                  ),
+                  )
                 }}
                 onPageSizeChange={handlePageSizeChange}
                 page={pageState.page}
@@ -270,14 +270,14 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                   setPageState({ ...pageState, page: newPage })
                 }
                 onSortModelChange={(model) => {
-                  let page = pageState.page
+                  let page = pageState.page;
                   if (pageState.sortOrder !== model[0]?.sort) {
-                    page = 0
+                    page = 0;
                     setPageState({
                       ...pageState,
                       sortOrder: model[0]?.sort,
-                      page,
-                    })
+                      page
+                    });
                   }
                 }}
               />
@@ -286,7 +286,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
         </>
       </DashboardCard>
     </>
-  )
-}
+  );
+};
 
-export default RecommendationsTable
+export default RecommendationsTable;

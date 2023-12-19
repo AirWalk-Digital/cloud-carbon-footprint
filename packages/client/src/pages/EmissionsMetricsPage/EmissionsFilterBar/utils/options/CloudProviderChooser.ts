@@ -5,25 +5,25 @@
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions,
-} from '../../../../../Types'
-import { DropdownSelections } from '../../../../../common/FilterBar/utils/FiltersUtil'
-import { CLOUD_PROVIDER_OPTIONS } from '../../../../../common/FilterBar/utils/DropdownConstants'
-import { OptionChooser } from '../../../../../common/FilterBar/utils/OptionChooser'
+  FilterOptions
+} from "../../../../../Types";
+import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
+import { CLOUD_PROVIDER_OPTIONS } from "../../../../../common/FilterBar/utils/DropdownConstants";
+import { OptionChooser } from "../../../../../common/FilterBar/utils/OptionChooser";
 
 export class CloudProviderChooser extends OptionChooser {
   constructor(
     selections: DropdownOption[],
     oldSelections: DropdownSelections,
-    filterOptions: FilterOptions,
+    filterOptions: FilterOptions
   ) {
     super(
       DropdownFilterOptions.CLOUD_PROVIDERS,
       CLOUD_PROVIDER_OPTIONS,
       selections,
       oldSelections,
-      filterOptions,
-    )
+      filterOptions
+    );
 
     this.choosers = {
       [DropdownFilterOptions.CLOUD_PROVIDERS]: () =>
@@ -31,7 +31,7 @@ export class CloudProviderChooser extends OptionChooser {
       [DropdownFilterOptions.ACCOUNTS]: () =>
         this.chooseDropdownFilterOption(DropdownFilterOptions.ACCOUNTS),
       [DropdownFilterOptions.SERVICES]: () =>
-        this.chooseDropdownFilterOption(DropdownFilterOptions.SERVICES),
-    }
+        this.chooseDropdownFilterOption(DropdownFilterOptions.SERVICES)
+    };
   }
 }

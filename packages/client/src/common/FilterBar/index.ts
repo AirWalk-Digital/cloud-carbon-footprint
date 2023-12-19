@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './FilterBar'
+export { default } from "./FilterBar";

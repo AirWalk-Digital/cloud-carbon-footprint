@@ -2,137 +2,137 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import axios from 'axios'
-import { renderHook } from '@testing-library/react-hooks'
-import useRemoteRecommendationsService from './RecommendationsServiceHook'
+import axios from "axios";
+import { renderHook } from "@testing-library/react-hooks";
+import useRemoteRecommendationsService from "./RecommendationsServiceHook";
 
-jest.mock('axios')
-const axiosMocked = axios as jest.Mocked<typeof axios>
+jest.mock("axios");
+const axiosMocked = axios as jest.Mocked<typeof axios>;
 
 const mockUseNavigate = jest.fn((args) =>
-  console.log('history push args', args),
-)
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => mockUseNavigate,
-}))
+  console.log("history push args", args)
+);
+jest.mock("react-router-dom", () => ({
+  useNavigate: () => mockUseNavigate
+}));
 
-const baseUrl = '/api'
-const minLoadTimeMs = 10
+const baseUrl = "/api";
+const minLoadTimeMs = 10;
 
-describe('Recommendations Service Hook', () => {
-  describe('when baseUrl is null', () => {
-    it('should do nothing', () => {
+describe("Recommendations Service Hook", () => {
+  describe("when baseUrl is null", () => {
+    it("should do nothing", () => {
       const { result } = renderHook(() =>
         useRemoteRecommendationsService({
-          baseUrl: null,
-        }),
-      )
+          baseUrl: null
+        })
+      );
 
-      expect(axiosMocked.get).not.toHaveBeenCalled()
+      expect(axiosMocked.get).not.toHaveBeenCalled();
       expect(result.current).toEqual({
         data: [],
         error: null,
-        loading: false,
-      })
-    })
-  })
+        loading: false
+      });
+    });
+  });
 
-  describe('when baseUrl is provided', () => {
-    it('should send request to /api endpoint', async () => {
-      axiosMocked.get.mockResolvedValue({ data: ['data'] })
+  describe("when baseUrl is provided", () => {
+    it("should send request to /api endpoint", async () => {
+      axiosMocked.get.mockResolvedValue({ data: ["data"] });
 
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteRecommendationsService({
           baseUrl,
           minLoadTimeMs,
-          awsRecommendationTarget: 'target',
-        }),
-      )
+          awsRecommendationTarget: "target"
+        })
+      );
 
-      expect(axiosMocked.get).toBeCalledWith('/api/recommendations', {
+      expect(axiosMocked.get).toBeCalledWith("/api/recommendations", {
         params: {
-          awsRecommendationTarget: 'target',
-        },
-      })
+          awsRecommendationTarget: "target"
+        }
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
-        data: ['data'],
+        data: ["data"],
         loading: true,
-        error: null,
-      })
+        error: null
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
-        data: ['data'],
+        data: ["data"],
         loading: false,
-        error: null,
-      })
-    })
-  })
-  describe('when response is an error', () => {
+        error: null
+      });
+    });
+  });
+  describe("when response is an error", () => {
     const error = {
-      message: 'Axios generated error message',
+      message: "Axios generated error message",
       response: {
         status: 500,
-        statusText: 'Internal Service Error',
-      },
-    }
+        statusText: "Internal Service Error"
+      }
+    };
 
     beforeEach(() => {
-      axiosMocked.get.mockRejectedValue(error)
-    })
+      axiosMocked.get.mockRejectedValue(error);
+    });
 
-    it('should return the error', async () => {
+    it("should return the error", async () => {
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteRecommendationsService({
           baseUrl,
-          minLoadTimeMs,
-        }),
-      )
+          minLoadTimeMs
+        })
+      );
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [],
         loading: true,
-        error,
-      })
+        error
+      });
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
         data: [],
         loading: false,
-        error,
-      })
-    })
+        error
+      });
+    });
 
-    describe('when error handler is provided', () => {
-      it('should invoke error handler with error thrown by axios', async () => {
-        const onApiError = jest.fn()
+    describe("when error handler is provided", () => {
+      it("should invoke error handler with error thrown by axios", async () => {
+        const onApiError = jest.fn();
 
         const { result, waitForNextUpdate } = renderHook(() =>
           useRemoteRecommendationsService({
             baseUrl,
             minLoadTimeMs,
-            onApiError,
-          }),
-        )
+            onApiError
+          })
+        );
 
-        await waitForNextUpdate()
+        await waitForNextUpdate();
         expect(result.current).toEqual({
           data: [],
           loading: true,
-          error,
-        })
-        expect(onApiError).toHaveBeenCalledWith(error)
+          error
+        });
+        expect(onApiError).toHaveBeenCalledWith(error);
 
-        await waitForNextUpdate()
+        await waitForNextUpdate();
         expect(result.current).toEqual({
           data: [],
           loading: false,
-          error,
-        })
-      })
-    })
-  })
-})
+          error
+        });
+      });
+    });
+  });
+});

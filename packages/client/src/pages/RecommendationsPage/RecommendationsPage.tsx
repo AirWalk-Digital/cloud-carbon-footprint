@@ -2,59 +2,62 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { ReactElement, useState } from 'react'
-import { Grid } from '@material-ui/core'
-import RecommendationsTable from './RecommendationsTable'
-import useStyles from './recommendationsPageStyles'
-import RecommendationsFilterBar from './RecommendationsFilterBar'
-import LoadingMessage from '../../common/LoadingMessage'
-import { ErrorState } from '../../layout/ErrorPage/ErrorPage'
-import { useRecommendationData } from '../../utils/hooks/RecommendationsDataHook'
-import { ClientConfig } from '../../Config'
-import loadConfig from '../../ConfigLoader'
-import { Co2eUnit } from '../../Types'
-import { FootprintData } from '../../utils/hooks'
+import React, { ReactElement, useState } from "react";
+import { Grid } from "@material-ui/core";
+import RecommendationsTable from "./RecommendationsTable";
+import useStyles from "./recommendationsPageStyles";
+import RecommendationsFilterBar from "./RecommendationsFilterBar";
+import LoadingMessage from "../../common/LoadingMessage";
+import { ErrorState } from "../../layout/ErrorPage/ErrorPage";
+import { useRecommendationData } from "../../utils/hooks/RecommendationsDataHook";
+import { ClientConfig } from "../../Config";
+import loadConfig from "../../ConfigLoader";
+import { Co2eUnit } from "../../Types";
+import { FootprintData } from "../../utils/hooks";
 import {
   checkFootprintDates,
-  sliceFootprintDataByLastMonth,
-} from '../../utils/helpers'
+  sliceFootprintDataByLastMonth
+} from "../../utils/helpers";
 
 interface RecommendationsPageProps {
-  onApiError?: (e: ErrorState) => void
-  config?: ClientConfig
-  footprint: FootprintData
+  onApiError?: (e: ErrorState) => void;
+  config?: ClientConfig;
+  footprint: FootprintData;
 }
 
 const RecommendationsPage = ({
   onApiError,
   config = loadConfig(),
-  footprint,
+  footprint
 }): ReactElement<RecommendationsPageProps> => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [co2eUnit, setCo2eUnit] = useState(Co2eUnit.MetricTonnes)
+  const [co2eUnit, setCo2eUnit] = useState(Co2eUnit.MetricTonnes);
 
-  const groupBy = config.GROUP_BY
-  const hasForecastValidationDisabled = config.DISABLE_FORECAST_VALIDATION
+  const groupBy = config.GROUP_BY;
+  const hasForecastValidationDisabled = config.DISABLE_FORECAST_VALIDATION;
 
-  let forecastDetails = { missingDates: [], groupBy }
+  let forecastDetails = { missingDates: [], groupBy };
 
-  const slicedFootprint = sliceFootprintDataByLastMonth(footprint.data, groupBy)
+  const slicedFootprint = sliceFootprintDataByLastMonth(
+    footprint.data,
+    groupBy
+  );
   if (!hasForecastValidationDisabled) {
-    forecastDetails = checkFootprintDates(slicedFootprint, groupBy)
+    forecastDetails = checkFootprintDates(slicedFootprint, groupBy);
   }
 
   const recommendations = useRecommendationData({
     baseUrl: config.BASE_URL,
     onApiError,
     groupBy,
-    footprint,
-  })
+    footprint
+  });
 
   if (recommendations.loading)
     return (
       <LoadingMessage message="Loading recommendations. This may take a while..." />
-    )
+    );
 
   return (
     <div className={classes.pageContainer}>
@@ -73,7 +76,7 @@ const RecommendationsPage = ({
         </Grid>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RecommendationsPage
+export default RecommendationsPage;

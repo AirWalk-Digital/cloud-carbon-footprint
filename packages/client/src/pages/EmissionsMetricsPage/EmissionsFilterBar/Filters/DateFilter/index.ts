@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './DateFilter'
+export { default } from "./DateFilter";

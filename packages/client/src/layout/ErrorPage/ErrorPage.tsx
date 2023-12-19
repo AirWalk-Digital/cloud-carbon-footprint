@@ -2,77 +2,78 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { ReactElement, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import CloudOffIcon from '@material-ui/icons/CloudOff'
-import { Grid } from '@material-ui/core'
-import makeStyles from '@material-ui/core/styles/makeStyles'
-import { createStyles, Theme } from '@material-ui/core/styles'
-import { AxiosError } from 'axios'
+import React, { ReactElement, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import CloudOffIcon from "@material-ui/icons/CloudOff";
+import { Grid } from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import { createStyles, Theme } from "@material-ui/core/styles";
+import { AxiosError } from "axios";
 
 export type ErrorState = {
-  statusText?: string
-  status?: string
-}
+  statusText?: string;
+  status?: string;
+};
 
 export type ErrorHandlingType = {
-  error: AxiosError | null
-  setError: (e?: AxiosError) => void
-}
+  error: AxiosError | null;
+  setError: (e?: AxiosError) => void;
+};
 
 export const useAxiosErrorHandling = (
-  onApiError?: (e: Error) => void,
+  onApiError?: (e: Error) => void
 ): ErrorHandlingType => {
-  const [error, setError] = useState<AxiosError | null>(null)
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(() => {
     if (error && onApiError) {
-      onApiError(error)
+      onApiError(error);
     }
-  }, [error])
+  }, [error]);
 
-  return { error, setError }
-}
+  return { error, setError };
+};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cloudIcon: {
-      fontSize: '175px',
-      color: theme.palette.primary.main,
+      fontSize: "175px",
+      color: theme.palette.primary.main
     },
     errorStatus: {
-      fontSize: '36px',
-      textAlign: 'center',
+      fontSize: "36px",
+      textAlign: "center"
     },
     errorMessage: {
-      fontSize: '18px',
-      textAlign: 'center',
-    },
-  }),
-)
+      fontSize: "18px",
+      textAlign: "center"
+    }
+  })
+);
 
 const DEFAULT_ERROR = {
-  status: '520',
-  statusText: 'Unknown Error',
-}
+  status: "520",
+  statusText: "Unknown Error"
+};
 
 export const formatAxiosError = (e: AxiosError): ErrorState => {
   return e.response
     ? {
         status: e.response.status.toString(),
-        statusText: e.response.statusText,
+        statusText: e.response.statusText
       }
-    : DEFAULT_ERROR
-}
+    : DEFAULT_ERROR;
+};
 
 interface ErrorPageProps {
-  errorMessage?: string
+  errorMessage?: string;
 }
 
 const ErrorPage = (props: ErrorPageProps): ReactElement<ErrorPageProps> => {
-  const location = useLocation()
-  const { statusText, status } = (location.state as ErrorState) ?? DEFAULT_ERROR
-  const classes = useStyles()
+  const location = useLocation();
+  const { statusText, status } =
+    (location.state as ErrorState) ?? DEFAULT_ERROR;
+  const classes = useStyles();
 
   return (
     <Grid
@@ -81,7 +82,7 @@ const ErrorPage = (props: ErrorPageProps): ReactElement<ErrorPageProps> => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ height: '100%' }}
+      style={{ height: "100%" }}
     >
       <CloudOffIcon className={classes.cloudIcon} />
       <div data-testid="error-page">
@@ -91,11 +92,11 @@ const ErrorPage = (props: ErrorPageProps): ReactElement<ErrorPageProps> => {
         <div data-testid="error-message" className={classes.errorMessage}>
           {props.errorMessage
             ? props.errorMessage
-            : 'Something has gone wrong, Please try again later'}
+            : "Something has gone wrong, Please try again later"}
         </div>
       </div>
     </Grid>
-  )
-}
+  );
+};
 
-export default ErrorPage
+export default ErrorPage;

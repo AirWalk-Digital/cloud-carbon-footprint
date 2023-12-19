@@ -2,26 +2,26 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, ReactElement } from 'react'
+import React, { FunctionComponent, ReactElement } from "react";
 import {
   Button,
   CardActions,
   CardContent,
   Link,
-  Typography,
-} from '@material-ui/core'
-import { OpenInNew } from '@material-ui/icons'
-import { ComparisonItem } from '../../../../Types'
-import useStyles from '../carbonComparisonStyles'
+  Typography
+} from "@material-ui/core";
+import { OpenInNew } from "@material-ui/icons";
+import { ComparisonItem } from "../../../../Types";
+import useStyles from "../carbonComparisonStyles";
 
 type CarbonComparisonProps = {
-  formatNumber: (number: number, decimalPlaces?: number) => string
-  totalMetricTons: number
-  comparisons: { [name: string]: ComparisonItem }
-  selection: string
-  updateSelection: (selection: string) => void
-  updateButtonColor: (selection: string) => 'default' | 'primary'
-}
+  formatNumber: (number: number, decimalPlaces?: number) => string;
+  totalMetricTons: number;
+  comparisons: { [name: string]: ComparisonItem };
+  selection: string;
+  updateSelection: (selection: string) => void;
+  updateButtonColor: (selection: string) => "default" | "primary";
+};
 
 const CarbonComparison: FunctionComponent<CarbonComparisonProps> = ({
   formatNumber,
@@ -29,10 +29,10 @@ const CarbonComparison: FunctionComponent<CarbonComparisonProps> = ({
   comparisons,
   selection,
   updateSelection,
-  updateButtonColor,
+  updateButtonColor
 }): ReactElement => {
-  const classes = useStyles()
-  const currentSource = comparisons[selection].source
+  const classes = useStyles();
+  const currentSource = comparisons[selection].source;
 
   return (
     <div>
@@ -87,19 +87,19 @@ const CarbonComparison: FunctionComponent<CarbonComparisonProps> = ({
         ))}
       </CardActions>
       <Typography className={classes.source} data-testid="epa-source">
-        Source:{' '}
+        Source:{" "}
         <Link
           href={currentSource.href}
           target="_blank"
           rel="noopener"
           className={classes.sourceLink}
         >
-          {currentSource.title}{' '}
-          <OpenInNew fontSize={'small'} className={classes.openIcon} />
+          {currentSource.title}{" "}
+          <OpenInNew fontSize={"small"} className={classes.openIcon} />
         </Link>
       </Typography>
     </div>
-  )
-}
+  );
+};
 
-export default CarbonComparison
+export default CarbonComparison;

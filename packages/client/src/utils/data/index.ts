@@ -2,7 +2,10 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { fakeEmissionFactors, generateEstimations } from './generateEstimations'
+export {
+  fakeEmissionFactors,
+  generateEstimations
+} from "./generateEstimations";
 export {
   mockData,
   mockDataWithUnknownsAWS,
@@ -13,5 +16,5 @@ export {
   mockRecommendationData,
   mockRecommendationDataWithUnknowns,
   mockEmissionsAndRecommendations,
-  mockEmissionsAndRecommendationsWithUnknowns,
-} from './mockData'
+  mockEmissionsAndRecommendationsWithUnknowns
+} from "./mockData";

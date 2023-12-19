@@ -2,10 +2,10 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import moment from 'moment'
+import moment from "moment";
 
-import * as FiltersUtil from './FiltersUtil'
-import { ALL_DROPDOWN_FILTER_OPTIONS } from './DropdownConstants'
+import * as FiltersUtil from "./FiltersUtil";
+import { ALL_DROPDOWN_FILTER_OPTIONS } from "./DropdownConstants";
 import {
   FilterResultResponse,
   DropdownOption,
@@ -14,93 +14,93 @@ import {
   filterLabels,
   FiltersConfig,
   MaybeFiltersDateRange,
-  FilterResults,
-} from '../../../Types'
-import { DropdownSelections } from './FiltersUtil'
-import { OptionChooser } from './OptionChooser'
+  FilterResults
+} from "../../../Types";
+import { DropdownSelections } from "./FiltersUtil";
+import { OptionChooser } from "./OptionChooser";
 
-type MaybeMoment = moment.Moment | null
+type MaybeMoment = moment.Moment | null;
 
 export class FiltersDateRange {
-  readonly startDate: MaybeMoment
-  readonly endDate: MaybeMoment
+  readonly startDate: MaybeMoment;
+  readonly endDate: MaybeMoment;
 
   constructor(startDate: MaybeMoment, endDate: MaybeMoment) {
-    this.startDate = startDate
-    this.endDate = endDate
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
   isComplete(): boolean {
-    return this.startDate !== null && this.endDate !== null
+    return this.startDate !== null && this.endDate !== null;
   }
 }
 
 export abstract class Filters {
-  readonly timeframe: number
-  readonly dateRange: MaybeFiltersDateRange
-  readonly options: DropdownSelections
+  readonly timeframe: number;
+  readonly dateRange: MaybeFiltersDateRange;
+  readonly options: DropdownSelections;
 
   protected constructor(config: FiltersConfig) {
-    this.timeframe = config.timeframe
-    this.dateRange = config.dateRange
-    this.options = { ...config.options }
+    this.timeframe = config.timeframe;
+    this.dateRange = config.dateRange;
+    this.options = { ...config.options };
   }
 
-  protected abstract create(config: FiltersConfig): Filters
+  protected abstract create(config: FiltersConfig): Filters;
 
   abstract createOptionChooser(
     filterType: DropdownFilterOptions,
     selections: DropdownOption[],
     oldSelections: DropdownSelections,
-    filterOptions: FilterOptions,
-  ): OptionChooser
+    filterOptions: FilterOptions
+  ): OptionChooser;
 
-  abstract filter(rawResults: FilterResults): FilterResults
+  abstract filter(rawResults: FilterResults): FilterResults;
 
   static generateConfig(
     newOptions: FilterResultResponse,
-    oldConfig: FiltersConfig,
+    oldConfig: FiltersConfig
   ): FiltersConfig {
-    const updatedOptions = { ...oldConfig.options }
+    const updatedOptions = { ...oldConfig.options };
     Object.keys(newOptions).map(
       (option) =>
         (updatedOptions[option] = [
           ALL_DROPDOWN_FILTER_OPTIONS[option],
-          ...newOptions[option],
-        ]),
-    )
+          ...newOptions[option]
+        ])
+    );
     const configUpdates = {
-      options: { ...updatedOptions },
-    }
+      options: { ...updatedOptions }
+    };
 
-    return Object.assign(oldConfig, configUpdates)
+    return Object.assign(oldConfig, configUpdates);
   }
 
   withTimeFrame(timeframe: number): Filters {
     return this.timeframe === timeframe
       ? this
-      : this.create({ ...this, dateRange: null, timeframe })
+      : this.create({ ...this, dateRange: null, timeframe });
   }
 
   withDropdownOption(
     dropdownOption: DropdownOption[],
     filterOptions: FilterOptions,
-    dropdownFilter: DropdownFilterOptions,
+    dropdownFilter: DropdownFilterOptions
   ): Filters {
-    const oldSelections = { ...this.options }
+    const oldSelections = { ...this.options };
     const optionChooser = this.createOptionChooser(
       dropdownFilter,
       dropdownOption,
       oldSelections,
-      filterOptions,
-    )
+      filterOptions
+    );
 
     return this.create({
       ...this,
       options: {
-        ...FiltersUtil.handleDropdownSelections(optionChooser),
-      },
-    })
+        ...FiltersUtil.handleDropdownSelections(optionChooser)
+      }
+    });
   }
 
   withDateRange(dateRange: FiltersDateRange): Filters {
@@ -108,13 +108,13 @@ export abstract class Filters {
       return this.create({
         ...this,
         timeframe: -1,
-        dateRange,
-      })
+        dateRange
+      });
     } else {
       return this.create({
         ...this,
-        dateRange,
-      })
+        dateRange
+      });
     }
   }
 
@@ -122,7 +122,7 @@ export abstract class Filters {
     return FiltersUtil.numSelectedLabel(
       this.options[optionType].length,
       allOptions.length,
-      filterLabels[optionType],
-    )
+      filterLabels[optionType]
+    );
   }
 }

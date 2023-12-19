@@ -10,13 +10,13 @@ export {
   sumCO2ByServiceOrRegion,
   sumServiceTotals,
   useFilterDataFromEstimates,
-  getMaxOfDataSeries,
-} from './transformData'
+  getMaxOfDataSeries
+} from "./transformData";
 
 export {
   co2eUnitMultiplier,
   co2eUnitLabel,
-  co2eUnitAbbreviation,
-} from './units'
+  co2eUnitAbbreviation
+} from "./units";
 
-export * from './handleDates'
+export * from "./handleDates";

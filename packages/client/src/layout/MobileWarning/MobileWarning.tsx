@@ -2,20 +2,20 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, ReactElement } from 'react'
-import { Container, IconButton, Modal, Typography } from '@material-ui/core'
-import { Close, Warning } from '@material-ui/icons'
-import DashboardCard from '../DashboardCard'
-import useStyles from './mobileWarningStyles'
+import React, { FunctionComponent, ReactElement } from "react";
+import { Container, IconButton, Modal, Typography } from "@material-ui/core";
+import { Close, Warning } from "@material-ui/icons";
+import DashboardCard from "../DashboardCard";
+import useStyles from "./mobileWarningStyles";
 
 type MobileWarningProps = {
-  handleClose?: () => void
-}
+  handleClose?: () => void;
+};
 
 const MobileWarning: FunctionComponent<MobileWarningProps> = ({
-  handleClose,
+  handleClose
 }): ReactElement => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Modal data-testid="warning-modal" open>
@@ -41,7 +41,7 @@ const MobileWarning: FunctionComponent<MobileWarningProps> = ({
         </DashboardCard>
       </Container>
     </Modal>
-  )
-}
+  );
+};
 
-export default MobileWarning
+export default MobileWarning;

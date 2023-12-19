@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './MonthFilter'
+export { default } from "./MonthFilter";

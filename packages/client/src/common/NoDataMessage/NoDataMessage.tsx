@@ -2,31 +2,31 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent, ReactElement } from 'react'
-import clsx from 'clsx'
-import { CardContent, Grid, Typography } from '@material-ui/core'
-import DashboardCard from '../../layout/DashboardCard'
-import useStyles from './noDataMessageStyles'
-import shruggingCloud from './V1Shrugging-cloud-icon.svg'
-import emptyStateIcon from './V1Empty-state-generic-icon.svg'
+import React, { FunctionComponent, ReactElement } from "react";
+import clsx from "clsx";
+import { CardContent, Grid, Typography } from "@material-ui/core";
+import DashboardCard from "../../layout/DashboardCard";
+import useStyles from "./noDataMessageStyles";
+import shruggingCloud from "./V1Shrugging-cloud-icon.svg";
+import emptyStateIcon from "./V1Empty-state-generic-icon.svg";
 
 type NoDataMessageProps = {
-  isTop?: boolean
-  isBold?: boolean
-  isHalf?: boolean
-  title?: string
-  boldTitle?: string
-}
+  isTop?: boolean;
+  isBold?: boolean;
+  isHalf?: boolean;
+  title?: string;
+  boldTitle?: string;
+};
 
 const NoDataMessage: FunctionComponent<NoDataMessageProps> = ({
   isTop,
   isBold,
   isHalf,
   title,
-  boldTitle,
+  boldTitle
 }): ReactElement => {
-  const classes = useStyles()
-  const containerClass = clsx({ [classes.largeMessage]: isBold })
+  const classes = useStyles();
+  const containerClass = clsx({ [classes.largeMessage]: isBold });
 
   return (
     <DashboardCard
@@ -65,7 +65,7 @@ const NoDataMessage: FunctionComponent<NoDataMessageProps> = ({
         </div>
       </>
     </DashboardCard>
-  )
-}
+  );
+};
 
-export default NoDataMessage
+export default NoDataMessage;

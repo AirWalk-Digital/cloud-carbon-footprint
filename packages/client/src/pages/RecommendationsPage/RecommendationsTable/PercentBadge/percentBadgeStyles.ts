@@ -2,38 +2,38 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from "@material-ui/core/styles";
 
-const lightPositive = '#e0fbcd'
-const darkPositive = '#00791E'
-const lightNegative = '#ffedf0'
-const darkNegative = '#c22000'
+const lightPositive = "#e0fbcd";
+const darkPositive = "#00791E";
+const lightNegative = "#ffedf0";
+const darkNegative = "#c22000";
 
 const useStyles = makeStyles(() => ({
   badgeContainer: {
-    display: 'flex',
+    display: "flex",
     gap: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 5,
     backgroundColor: lightPositive,
     color: darkPositive,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     height: 30,
     marginTop: 5,
     borderRadius: 3,
-    '& p': {
-      fontWeight: 'bold',
-    },
+    "& p": {
+      fontWeight: "bold"
+    }
   },
   increasingBadge: {
     backgroundColor: lightNegative,
-    color: darkNegative,
+    color: darkNegative
   },
   noChangeBadge: {
-    backgroundColor: '#EDEDED',
-    color: 'black',
-  },
-}))
+    backgroundColor: "#EDEDED",
+    color: "black"
+  }
+}));
 
-export default useStyles
+export default useStyles;

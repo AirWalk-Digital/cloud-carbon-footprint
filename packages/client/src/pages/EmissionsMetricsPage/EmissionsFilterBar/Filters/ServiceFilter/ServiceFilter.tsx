@@ -2,26 +2,26 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent } from 'react'
-import FilterDropdown from '../../../../../common/FilterDropdown'
+import React, { FunctionComponent } from "react";
+import FilterDropdown from "../../../../../common/FilterDropdown";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterProps,
-} from '../../../../../Types'
+  FilterProps
+} from "../../../../../Types";
 
 const ServiceFilter: FunctionComponent<FilterProps> = ({
   filters,
   setFilters,
-  options,
+  options
 }) => {
-  const serviceOptions = options.services
+  const serviceOptions = options.services;
   return (
     <FilterDropdown
       id="services-filter"
       displayValue={filters.label(
         serviceOptions,
-        DropdownFilterOptions.SERVICES,
+        DropdownFilterOptions.SERVICES
       )}
       options={serviceOptions}
       selections={filters.options.services}
@@ -31,12 +31,12 @@ const ServiceFilter: FunctionComponent<FilterProps> = ({
           filters.withDropdownOption(
             selections,
             options,
-            DropdownFilterOptions.SERVICES,
-          ),
+            DropdownFilterOptions.SERVICES
+          )
         )
       }
     />
-  )
-}
+  );
+};
 
-export default ServiceFilter
+export default ServiceFilter;

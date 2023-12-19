@@ -2,21 +2,21 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent } from 'react'
-import { Grid, Typography } from '@material-ui/core'
-import useStyles from '../recommendationsSidePanelStyles'
+import React, { FunctionComponent } from "react";
+import { Grid, Typography } from "@material-ui/core";
+import useStyles from "../recommendationsSidePanelStyles";
 
 type RecommendationsPanelColumnProps = {
-  label: string
-  content: string | number
-  subLabel?: string
-  hasLeftAlignedContent?: boolean
-}
+  label: string;
+  content: string | number;
+  subLabel?: string;
+  hasLeftAlignedContent?: boolean;
+};
 
 const RecommendationsPanelColumn: FunctionComponent<
   RecommendationsPanelColumnProps
 > = ({ label, content, subLabel, hasLeftAlignedContent }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Grid
       className={classes.detailsColumn}
@@ -40,13 +40,13 @@ const RecommendationsPanelColumn: FunctionComponent<
       <Grid item>
         <Typography
           component="p"
-          align={hasLeftAlignedContent ? 'left' : 'center'}
+          align={hasLeftAlignedContent ? "left" : "center"}
         >
           {content}
         </Typography>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default RecommendationsPanelColumn
+export default RecommendationsPanelColumn;

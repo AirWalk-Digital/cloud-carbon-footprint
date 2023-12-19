@@ -2,24 +2,24 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { FunctionComponent } from 'react'
-import clsx from 'clsx'
-import { Card, Divider, Typography } from '@material-ui/core'
-import Tooltip from '../../../../common/Tooltip'
-import useStyles from './forecastCardStyles'
-import PercentBadge from '../PercentBadge'
-import { Co2eUnit } from '../../../../Types'
-import { co2eUnitLabel } from '../../../../utils/helpers'
+import React, { FunctionComponent } from "react";
+import clsx from "clsx";
+import { Card, Divider, Typography } from "@material-ui/core";
+import Tooltip from "../../../../common/Tooltip";
+import useStyles from "./forecastCardStyles";
+import PercentBadge from "../PercentBadge";
+import { Co2eUnit } from "../../../../Types";
+import { co2eUnitLabel } from "../../../../utils/helpers";
 
 export type ForecastCardProps = {
-  title: string
-  co2eSavings: number | string
-  costSavings: string
-  co2ePercentChange?: number
-  costPercentChange?: number
-  co2eUnit?: Co2eUnit
-  id: string
-}
+  title: string;
+  co2eSavings: number | string;
+  costSavings: string;
+  co2ePercentChange?: number;
+  costPercentChange?: number;
+  co2eUnit?: Co2eUnit;
+  id: string;
+};
 
 const ForecastCard: FunctionComponent<ForecastCardProps> = ({
   title,
@@ -28,20 +28,20 @@ const ForecastCard: FunctionComponent<ForecastCardProps> = ({
   co2ePercentChange,
   costPercentChange,
   co2eUnit = Co2eUnit.MetricTonnes,
-  id,
+  id
 }) => {
-  const classes = useStyles({ co2ePercentChange, costPercentChange })
-  const hasCo2ePercentChange = co2ePercentChange !== undefined
-  const hasCostPercentChange = costPercentChange !== undefined
+  const classes = useStyles({ co2ePercentChange, costPercentChange });
+  const hasCo2ePercentChange = co2ePercentChange !== undefined;
+  const hasCostPercentChange = costPercentChange !== undefined;
 
   const co2ePercentIsInvalid =
-    hasCo2ePercentChange && co2ePercentChange === null
+    hasCo2ePercentChange && co2ePercentChange === null;
   const costPercentIsInvalid =
-    hasCostPercentChange && costPercentChange === null
+    hasCostPercentChange && costPercentChange === null;
 
   const noProjectedChangeMessage =
-    'Your savings opportunity over 30 days is larger than your current carbon or spend. For a percentage to be shown, additional data may be needed.'
-  const shouldDisplayTooltip = co2ePercentIsInvalid || costPercentIsInvalid
+    "Your savings opportunity over 30 days is larger than your current carbon or spend. For a percentage to be shown, additional data may be needed.";
+  const shouldDisplayTooltip = co2ePercentIsInvalid || costPercentIsInvalid;
 
   return (
     <Card data-testid={`forecast-card-${id}`} className={classes.card}>
@@ -52,7 +52,7 @@ const ForecastCard: FunctionComponent<ForecastCardProps> = ({
       <div
         className={clsx(classes.contentContainer, {
           [classes.contentWithBadge]:
-            hasCo2ePercentChange && hasCostPercentChange,
+            hasCo2ePercentChange && hasCostPercentChange
         })}
       >
         <div className={classes.numberContainer}>
@@ -87,7 +87,7 @@ const ForecastCard: FunctionComponent<ForecastCardProps> = ({
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default ForecastCard
+export default ForecastCard;

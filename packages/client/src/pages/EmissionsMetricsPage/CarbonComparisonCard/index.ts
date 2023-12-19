@@ -2,4 +2,4 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-export { default } from './CarbonComparisonCard'
+export { default } from "./CarbonComparisonCard";

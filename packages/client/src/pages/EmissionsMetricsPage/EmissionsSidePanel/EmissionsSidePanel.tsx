@@ -2,15 +2,15 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { Divider, Link, Typography } from '@material-ui/core'
-import clsx from 'clsx'
-import { OpenInNew } from '@material-ui/icons'
-import React, { FunctionComponent } from 'react'
-import SidePanel from '../../../common/SidePanel'
-import useStyles from './emissionsSidePanelStyles'
+import { Divider, Link, Typography } from "@material-ui/core";
+import clsx from "clsx";
+import { OpenInNew } from "@material-ui/icons";
+import React, { FunctionComponent } from "react";
+import SidePanel from "../../../common/SidePanel";
+import useStyles from "./emissionsSidePanelStyles";
 
 export const Methodology: FunctionComponent = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <>
       <Typography className={classes.content} component="p">
@@ -59,19 +59,19 @@ export const Methodology: FunctionComponent = () => {
         rel="noopener"
         className={classes.methodology}
       >
-        Read more in our full methodology here{' '}
+        Read more in our full methodology here{" "}
         <OpenInNew fontSize="small" className={classes.openIcon} />
       </Link>
     </>
-  )
-}
+  );
+};
 
 const EmissionsSidePanel: FunctionComponent = () => {
   return (
     <SidePanel title="How do we get our carbon estimates?" drawerWidth={360}>
       <Methodology />
     </SidePanel>
-  )
-}
+  );
+};
 
-export default EmissionsSidePanel
+export default EmissionsSidePanel;

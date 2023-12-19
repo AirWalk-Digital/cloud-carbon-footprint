@@ -2,107 +2,107 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import axios from 'axios'
-import { renderHook } from '@testing-library/react-hooks'
-import useRemoteEmissionService from './EmissionFactorServiceHook'
+import axios from "axios";
+import { renderHook } from "@testing-library/react-hooks";
+import useRemoteEmissionService from "./EmissionFactorServiceHook";
 
-jest.mock('axios')
-const axiosMocked = axios as jest.Mocked<typeof axios>
+jest.mock("axios");
+const axiosMocked = axios as jest.Mocked<typeof axios>;
 
 const mockUseNavigate = jest.fn((args) =>
-  console.log('history push args', args),
-)
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => mockUseNavigate,
-}))
+  console.log("history push args", args)
+);
+jest.mock("react-router-dom", () => ({
+  useNavigate: () => mockUseNavigate
+}));
 
-const baseUrl = '/api'
+const baseUrl = "/api";
 
-describe('EmissionFactorServiceHook', () => {
-  describe('when baseUrl is null', () => {
-    it('should do nothing', () => {
+describe("EmissionFactorServiceHook", () => {
+  describe("when baseUrl is null", () => {
+    it("should do nothing", () => {
       const { result } = renderHook(() =>
         useRemoteEmissionService({
-          baseUrl: null,
-        }),
-      )
+          baseUrl: null
+        })
+      );
 
-      expect(axiosMocked.get).not.toHaveBeenCalled()
+      expect(axiosMocked.get).not.toHaveBeenCalled();
       expect(result.current).toEqual({
         data: [],
         error: null,
-        loading: true,
-      })
-    })
-  })
-  describe('when baseUrl is provided', () => {
-    it('Should send api call to /regions/emissions-factors', async () => {
-      axiosMocked.get.mockResolvedValue({ data: ['data'] })
+        loading: true
+      });
+    });
+  });
+  describe("when baseUrl is provided", () => {
+    it("Should send api call to /regions/emissions-factors", async () => {
+      axiosMocked.get.mockResolvedValue({ data: ["data"] });
 
       const { result, waitForNextUpdate } = renderHook(() =>
         useRemoteEmissionService({
-          baseUrl,
-        }),
-      )
+          baseUrl
+        })
+      );
 
-      expect(axios.get).toBeCalledWith('/api/regions/emissions-factors')
+      expect(axios.get).toBeCalledWith("/api/regions/emissions-factors");
 
-      await waitForNextUpdate()
+      await waitForNextUpdate();
       expect(result.current).toEqual({
-        data: ['data'],
+        data: ["data"],
         loading: false,
-        error: null,
-      })
-    })
+        error: null
+      });
+    });
 
-    describe('when response is an error', () => {
+    describe("when response is an error", () => {
       const error = {
-        message: 'Axios generated error message',
+        message: "Axios generated error message",
         response: {
           status: 500,
-          statusText: 'Internal Service Error',
-        },
-      }
+          statusText: "Internal Service Error"
+        }
+      };
 
       beforeEach(() => {
-        axiosMocked.get.mockRejectedValue(error)
-      })
+        axiosMocked.get.mockRejectedValue(error);
+      });
 
-      it('should return the error', async () => {
+      it("should return the error", async () => {
         const { result, waitForNextUpdate } = renderHook(() =>
           useRemoteEmissionService({
-            baseUrl,
-          }),
-        )
+            baseUrl
+          })
+        );
 
-        await waitForNextUpdate()
+        await waitForNextUpdate();
         expect(result.current).toEqual({
           data: [],
           loading: false,
-          error,
-        })
-      })
+          error
+        });
+      });
 
-      describe('when error handler is provided', () => {
-        it('should invoke error handler with error thrown by axios', async () => {
-          const onApiError = jest.fn()
+      describe("when error handler is provided", () => {
+        it("should invoke error handler with error thrown by axios", async () => {
+          const onApiError = jest.fn();
 
           const { result, waitForNextUpdate } = renderHook(() =>
             useRemoteEmissionService({
               baseUrl,
-              onApiError,
-            }),
-          )
+              onApiError
+            })
+          );
 
-          await waitForNextUpdate()
+          await waitForNextUpdate();
           expect(result.current).toEqual({
             data: [],
             loading: false,
-            error,
-          })
-          expect(onApiError).toHaveBeenCalledWith(error)
-        })
-      })
-    })
-  })
-})
+            error
+          });
+          expect(onApiError).toHaveBeenCalledWith(error);
+        });
+      });
+    });
+  });
+});

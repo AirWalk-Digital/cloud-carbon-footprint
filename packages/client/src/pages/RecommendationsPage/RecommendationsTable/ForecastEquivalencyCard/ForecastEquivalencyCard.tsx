@@ -2,23 +2,23 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import { FunctionComponent } from 'react'
-import { Card, Typography } from '@material-ui/core'
-import { Eco, CalendarToday } from '@material-ui/icons'
-import useStyles from './forecastEquivalencyCardStyles'
+import { FunctionComponent } from "react";
+import { Card, Typography } from "@material-ui/core";
+import { Eco, CalendarToday } from "@material-ui/icons";
+import useStyles from "./forecastEquivalencyCardStyles";
 
 type ForecastEquivalencyProps = {
-  title: string
-  treeSeedlings: string
-  yearCostSavings: string
-}
+  title: string;
+  treeSeedlings: string;
+  yearCostSavings: string;
+};
 
 const ForecastEquivalencyCard: FunctionComponent<ForecastEquivalencyProps> = ({
   title,
   treeSeedlings,
-  yearCostSavings,
+  yearCostSavings
 }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Card data-testid="forecast-equivalency-card" className={classes.card}>
       <div className={classes.titleContainer}>
@@ -47,7 +47,7 @@ const ForecastEquivalencyCard: FunctionComponent<ForecastEquivalencyProps> = ({
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default ForecastEquivalencyCard
+export default ForecastEquivalencyCard;
