@@ -11,18 +11,18 @@ const useStyles = makeStyles(() => ({
     borderRadius: 12,
     display: "flex",
     alignItems: "center",
-    maxWidth: 1200
+    maxWidth: 1200,
   },
   noContainer: {
     background: "none",
     paddingBottom: 0,
-    maxWidth: "100%"
+    maxWidth: "100%",
   },
   icon: {
     width: 40,
     height: 40,
     color: "#ff9800",
-    paddingRight: 10
+    paddingRight: 10,
   },
   accordionContainer: {
     boxShadow: "none",
@@ -33,12 +33,12 @@ const useStyles = makeStyles(() => ({
     maxWidth: 1200,
     margin: "25px auto 0 auto !important",
     "&::before": {
-      backgroundColor: "white"
+      backgroundColor: "white",
     },
     "& ul": {
-      margin: 0
-    }
-  }
+      margin: 0,
+    },
+  },
 }));
 
 export default useStyles;
