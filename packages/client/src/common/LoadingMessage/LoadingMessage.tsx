@@ -11,7 +11,7 @@ type LoadingMessageProps = {
 };
 
 const LoadingMessage: FunctionComponent<LoadingMessageProps> = ({
-  message
+  message,
 }) => {
   const classes = useStyles();
   return (
