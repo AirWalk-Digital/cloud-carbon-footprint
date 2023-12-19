@@ -28,7 +28,7 @@ interface EmissionsMetricsPageProps {
 export default function EmissionsMetricsPage({
   config = loadConfig(),
   onApiError,
-  footprint
+  footprint,
 }: EmissionsMetricsPageProps): ReactElement<EmissionsMetricsPageProps> {
   const classes = useStyles();
 
@@ -46,7 +46,7 @@ export default function EmissionsMetricsPage({
     filterOptions: filterOptions as unknown as FilterOptions,
     filters,
     setFilters,
-    filteredData: filteredData as EstimationResult[]
+    filteredData: filteredData as EstimationResult[],
   };
 
   return (
