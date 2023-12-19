@@ -28,7 +28,7 @@ const ForecastCard: FunctionComponent<ForecastCardProps> = ({
   co2ePercentChange,
   costPercentChange,
   co2eUnit = Co2eUnit.MetricTonnes,
-  id
+  id,
 }) => {
   const classes = useStyles({ co2ePercentChange, costPercentChange });
   const hasCo2ePercentChange = co2ePercentChange !== undefined;
@@ -52,7 +52,7 @@ const ForecastCard: FunctionComponent<ForecastCardProps> = ({
       <div
         className={clsx(classes.contentContainer, {
           [classes.contentWithBadge]:
-            hasCo2ePercentChange && hasCostPercentChange
+            hasCo2ePercentChange && hasCostPercentChange,
         })}
       >
         <div className={classes.numberContainer}>
