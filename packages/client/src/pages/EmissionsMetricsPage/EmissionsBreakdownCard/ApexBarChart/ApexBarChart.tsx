@@ -21,11 +21,11 @@ type ApexBarChartProps = {
 const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
   data,
   dataType,
-  emissionsData
+  emissionsData,
 }) => {
   const [pageData, setPageData] = useState<Page<PageEntry>>({
     data: [],
-    page: 0
+    page: 0,
   });
 
   const theme = useTheme();
@@ -43,7 +43,7 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
     .map((item) => {
       return {
         x: [item[0], `(${item[1][0]})`],
-        y: item[1][1]
+        y: item[1][1],
       };
     })
     .sort((higherC02, lowerCO2) => lowerCO2.y - higherC02.y);
@@ -70,7 +70,7 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
 
   const toolbarOffset = {
     x: -120,
-    y: dataType === "region" ? -122 : -55
+    y: dataType === "region" ? -122 : -55,
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,8 +78,8 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
     series: [
       {
         name: "Total CO2e",
-        data: pageData.data
-      }
+        data: pageData.data,
+      },
     ],
     colors: customBarColors,
     chart: {
@@ -94,35 +94,35 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path>
                 </svg>
             </div>   
-           `
-        }
-      }
+           `,
+        },
+      },
     },
     grid: {
       show: false,
       yaxis: {
         lines: {
-          show: false
-        }
+          show: false,
+        },
       },
       xaxis: {
         lines: {
-          show: false
-        }
+          show: false,
+        },
       },
       padding: {
-        left: dataType === "region" ? -15 : -5
-      }
+        left: dataType === "region" ? -15 : -5,
+      },
     },
     plotOptions: {
       bar: {
         horizontal: true,
         barHeight: `${7 * pageData.data.length}%`,
-        distributed: true
-      }
+        distributed: true,
+      },
     },
     legend: {
-      show: false
+      show: false,
     },
     dataLabels: {
       enabled: true,
@@ -144,20 +144,20 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
         padding: 6,
         borderRadius: 1,
         borderWidth: 1,
-        opacity: 0.9
-      }
+        opacity: 0.9,
+      },
     },
     xaxis: {
       type: "category",
       labels: {
         style: {
-          fontSize: 0
-        }
+          fontSize: 0,
+        },
       },
       axisBorder: {
-        show: false
+        show: false,
       },
-      max: maxThreshold
+      max: maxThreshold,
     },
     yaxis: {
       labels: {
@@ -165,9 +165,9 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
         maxWidth: 150,
         offsetY: 5,
         style: {
-          fontSize: "12px"
-        }
-      }
+          fontSize: "12px",
+        },
+      },
     },
     tooltip: {
       fillSeriesColor: false,
@@ -176,10 +176,10 @@ const ApexBarChart: FunctionComponent<ApexBarChartProps> = ({
           return `${dataEntries[
             pageData.page * pageSize + opts.dataPointIndex
           ].y.toFixed(3)} metric tons`;
-        }
-      }
+        },
+      },
     },
-    height: "500px"
+    height: "500px",
   };
 
   const handlePage = (page: Page<PageEntry>) => {
