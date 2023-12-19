@@ -24,7 +24,7 @@ const DashboardCard: FunctionComponent<DashboardCardProps> = ({
   id,
   testId,
   containerClass,
-  children
+  children,
 }) => {
   const classes = useStyles();
 
@@ -34,14 +34,14 @@ const DashboardCard: FunctionComponent<DashboardCardProps> = ({
       xs={isHalf ? false : 12}
       className={clsx({
         [classes.cardHalf]: isHalf,
-        [containerClass]: containerClass
+        [containerClass]: containerClass,
       })}
       data-testid={testId}
     >
       <Card
         id={id}
         className={clsx(classes.card, {
-          [classes.minHeight]: isHalf
+          [classes.minHeight]: isHalf,
         })}
       >
         <Box className={classes.contentContainer} padding={noPadding ? 0 : 3}>
