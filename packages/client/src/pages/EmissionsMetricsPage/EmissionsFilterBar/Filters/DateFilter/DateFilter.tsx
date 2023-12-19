@@ -13,7 +13,7 @@ import { FilterProps } from "../../../../../Types";
 
 const DateFilter: FunctionComponent<FilterProps> = ({
   filters,
-  setFilters
+  setFilters,
 }) => {
   const today = moment.utc();
   const startOfLastYear = moment.utc(
