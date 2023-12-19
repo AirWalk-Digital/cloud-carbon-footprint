@@ -7,7 +7,7 @@ import React, {
   ReactElement,
   SyntheticEvent,
   useEffect,
-  useState
+  useState,
 } from "react";
 import {
   DataGrid,
@@ -15,11 +15,11 @@ import {
   GridColDef,
   GridOverlay,
   GridRowParams,
-  MuiEvent
+  MuiEvent,
 } from "@mui/x-data-grid";
 import {
   RecommendationResult,
-  ServiceData
+  ServiceData,
 } from "@cloud-carbon-footprint/common";
 import { Typography } from "@material-ui/core";
 import DashboardCard from "../../../layout/DashboardCard";
@@ -31,7 +31,7 @@ import Forecast, { ForecastDetails } from "./Forecast/Forecast";
 import CustomPagination from "./CustomPagination";
 import {
   tableFormatNearZero,
-  tableFormatRawCo2e
+  tableFormatRawCo2e,
 } from "../../../utils/helpers/transformData";
 import { Co2eUnit, RecommendationRow } from "../../../Types";
 import RecommendationsSidePanel from "../RecommendationsSidePanel";
@@ -48,22 +48,22 @@ const getColumns = (co2eUnit: Co2eUnit): GridColDef[] => [
   {
     field: "cloudProvider",
     headerName: "Cloud Provider",
-    width: 175
+    width: 175,
   },
   {
     field: "accountName",
     headerName: "Account Name",
-    flex: 0.75
+    flex: 0.75,
   },
   {
     field: "region",
     headerName: "Region",
-    flex: 0.5
+    flex: 0.5,
   },
   {
     field: "recommendationType",
     headerName: "Recommendation Type",
-    flex: 0.75
+    flex: 0.75,
   },
   {
     field: "costSavings",
@@ -75,7 +75,7 @@ const getColumns = (co2eUnit: Co2eUnit): GridColDef[] => [
       } else {
         return "-";
       }
-    }
+    },
   },
   {
     field: "co2eSavings",
@@ -87,22 +87,22 @@ const getColumns = (co2eUnit: Co2eUnit): GridColDef[] => [
         return "-";
       }
     },
-    flex: 0.75
-  }
+    flex: 0.75,
+  },
 ];
 
 const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
   emissionsData,
   recommendations,
   co2eUnit,
-  forecastDetails
+  forecastDetails,
 }): ReactElement => {
   const [searchBarValue, setSearchBarValue] = useState("");
   const [rows, setRows] = useState([]);
   const initialPageState = {
     page: 0,
     pageSize: 25,
-    sortOrder: null
+    sortOrder: null,
   };
   const [pageState, setPageState] = useState(initialPageState);
 
@@ -122,7 +122,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
             ...recommendation,
             id: index,
             co2eUnit: co2eUnit,
-            co2eSavings: recommendation.co2eSavings
+            co2eSavings: recommendation.co2eSavings,
           };
           // Replace any undefined values and round numbers to thousandth decimal
           Object.keys(recommendation).forEach((key) => {
@@ -156,7 +156,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
       "kilowattHourSavings",
       "instanceName",
       "accountId",
-      "recommendationDetail"
+      "recommendationDetail",
     ];
     const filteredRecommendations = recommendations.filter(
       (row: RecommendationResult) => {
@@ -248,7 +248,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                 hideFooterSelectedRowCount={true}
                 classes={{
                   cell: classes.cell,
-                  row: classes.row
+                  row: classes.row,
                 }}
                 onRowClick={handleRowClick}
                 disableColumnFilter
@@ -262,7 +262,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                       to get started. (Try adding accounts, regions or
                       recommendation types)
                     </GridOverlay>
-                  )
+                  ),
                 }}
                 onPageSizeChange={handlePageSizeChange}
                 page={pageState.page}
@@ -276,7 +276,7 @@ const RecommendationsTable: FunctionComponent<RecommendationsTableProps> = ({
                     setPageState({
                       ...pageState,
                       sortOrder: model[0]?.sort,
-                      page
+                      page,
                     });
                   }
                 }}
