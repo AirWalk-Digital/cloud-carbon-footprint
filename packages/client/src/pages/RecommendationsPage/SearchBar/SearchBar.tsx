@@ -17,7 +17,7 @@ type SearchBarProps = {
 const SearchBar: FunctionComponent<SearchBarProps> = ({
   value,
   onChange,
-  clearSearch
+  clearSearch,
 }) => {
   const classes = useStyles();
   return (
@@ -41,7 +41,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({
           >
             <ClearIcon fontSize="small" />
           </IconButton>
-        )
+        ),
       }}
     />
   );
