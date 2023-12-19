@@ -6,7 +6,7 @@ import { OptionChooser } from "../../../../../common/FilterBar/utils/OptionChoos
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions
+  FilterOptions,
 } from "../../../../../Types";
 import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
 
@@ -31,7 +31,7 @@ export class RecommendationTypeChooser extends OptionChooser {
       [DropdownFilterOptions.ACCOUNTS]: () =>
         this.chooseDropdownFilterOption(DropdownFilterOptions.ACCOUNTS),
       [DropdownFilterOptions.REGIONS]: () =>
-        this.chooseDropdownFilterOption(DropdownFilterOptions.REGIONS)
+        this.chooseDropdownFilterOption(DropdownFilterOptions.REGIONS),
     };
   }
 }
