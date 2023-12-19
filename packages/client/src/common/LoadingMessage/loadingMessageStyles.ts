@@ -12,12 +12,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     justifyItems: "center",
-    height: "calc(100vh - 65px)"
+    height: "calc(100vh - 65px)",
   },
   loadingMessage: {
     padding: theme.spacing(PADDING_LOADING),
-    fontSize: "24px"
-  }
+    fontSize: "24px",
+  },
 }));
 
 export default useStyles;
