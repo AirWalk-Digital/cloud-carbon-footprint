@@ -7,7 +7,7 @@ import FilterDropdown from "../../common/FilterDropdown";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterProps, 
+  FilterProps,
 } from "../../Types";
 
 const AccountFilter: FunctionComponent<FilterProps> = ({
