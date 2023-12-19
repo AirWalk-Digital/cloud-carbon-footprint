@@ -1,14 +1,14 @@
 import { useMemo } from "react";
 import {
   RecommendationResult,
-  ServiceData
+  ServiceData,
 } from "@cloud-carbon-footprint/common";
 import { useRemoteRecommendationsService } from "./index";
 import {
   EmissionsAndRecommendationResults,
   FilterBarProps,
   FilterOptions,
-  FilterResultResponse
+  FilterResultResponse,
 } from "../../Types";
 import { useFilterDataFromRecommendations } from "../helpers/transformData";
 import { RecommendationsFilters } from "../../pages/RecommendationsPage/RecommendationsFilterBar/utils/RecommendationsFilters";
@@ -33,7 +33,7 @@ export const useRecommendationData = (
       recommendations: recommendations.data,
       emissions: params.footprint.data.flatMap(
         (estimationResult) => estimationResult.serviceEstimates
-      )
+      ),
     }),
     [recommendations.data, params.footprint.data]
   );
@@ -50,7 +50,7 @@ export const useRecommendationData = (
 
   const {
     recommendations: filteredRecommendationData,
-    emissions: filteredEmissionsData
+    emissions: filteredEmissionsData,
   } = filteredData as EmissionsAndRecommendationResults;
 
   return {
@@ -59,10 +59,10 @@ export const useRecommendationData = (
     filterBarProps: {
       filters,
       setFilters,
-      filterOptions: filterOptions as unknown as FilterOptions
+      filterOptions: filterOptions as unknown as FilterOptions,
     },
     filteredEmissionsData: filteredEmissionsData,
-    filteredRecommendationData: filteredRecommendationData
+    filteredRecommendationData: filteredRecommendationData,
   };
 };
 
