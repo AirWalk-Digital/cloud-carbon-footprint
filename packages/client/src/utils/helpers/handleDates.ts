@@ -16,7 +16,7 @@ const groupByAmount = {
   week: 4,
   month: 1,
   quarter: 1,
-  year: 1
+  year: 1,
 };
 
 export const getEmissionDateRange = ({ config = loadConfig() }: dateProps) => {
@@ -46,7 +46,7 @@ export const getEmissionDateRange = ({ config = loadConfig() }: dateProps) => {
 
   return {
     start: startDate,
-    end: endDate
+    end: endDate,
   };
 };
 
@@ -74,7 +74,7 @@ export const checkFootprintDates = (data, groupBy = "day"): ForecastDetails => {
 
   return {
     missingDates,
-    groupBy
+    groupBy,
   };
 };
 
