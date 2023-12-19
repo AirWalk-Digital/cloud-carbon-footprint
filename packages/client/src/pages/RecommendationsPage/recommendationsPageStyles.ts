@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(({ spacing }) => ({
   boxContainer: {
-    padding: spacing(3, 10)
+    padding: spacing(3, 10),
   },
   loadingContainer: {
     padding: spacing(3, 10),
@@ -14,12 +14,12 @@ const useStyles = makeStyles(({ spacing }) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    justifyItems: "center"
+    justifyItems: "center",
   },
   pageContainer: {
     height: "100%",
-    overflowY: "scroll"
-  }
+    overflowY: "scroll",
+  },
 }));
 
 export default useStyles;
