@@ -16,7 +16,7 @@ type ForecastEquivalencyProps = {
 const ForecastEquivalencyCard: FunctionComponent<ForecastEquivalencyProps> = ({
   title,
   treeSeedlings,
-  yearCostSavings
+  yearCostSavings,
 }) => {
   const classes = useStyles();
   return (
