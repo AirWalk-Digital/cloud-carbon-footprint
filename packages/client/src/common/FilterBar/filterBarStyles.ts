@@ -15,24 +15,24 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
     zIndex: 1199,
-    padding: "9px 10px 7px 10px"
+    padding: "9px 10px 7px 10px",
   },
   filterContainer: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   filterContainerSection: {
     display: "flex",
     flexWrap: "wrap",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   filter: {
     resize: "none",
     padding: "2px 4px 0 4px",
     marginRight: theme.spacing(PADDING_FILTER),
-    minWidth: "240px"
-  }
+    minWidth: "240px",
+  },
 }));
 
 export default useStyles;
