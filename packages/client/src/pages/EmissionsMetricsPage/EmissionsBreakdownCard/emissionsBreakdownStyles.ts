@@ -12,7 +12,7 @@ const useStyles = makeStyles<CCFTheme>(({ palette }) => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    marginBottom: "24px"
+    marginBottom: "24px",
   },
   title: {
     margin: "0",
@@ -20,8 +20,8 @@ const useStyles = makeStyles<CCFTheme>(({ palette }) => ({
     fontFamily: "Helvetica, Arial, sans-serif",
     opacity: "1",
     fontWeight: 900,
-    color: palette.lightTitle
-  }
+    color: palette.lightTitle,
+  },
 }));
 
 export default useStyles;
