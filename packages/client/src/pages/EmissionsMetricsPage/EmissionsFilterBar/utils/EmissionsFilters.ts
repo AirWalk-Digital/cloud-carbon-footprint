@@ -10,13 +10,13 @@ import {
   FilterOptions,
   FilterResultResponse,
   FiltersConfig,
-  unknownOptionTypes
+  unknownOptionTypes,
 } from "../../../../Types";
 import {
   ALL_ACCOUNTS_DROPDOWN_OPTION,
   ALL_DROPDOWN_FILTER_OPTIONS,
   ALL_SERVICES_DROPDOWN_OPTION,
-  CLOUD_PROVIDER_OPTIONS
+  CLOUD_PROVIDER_OPTIONS,
 } from "../../../../common/FilterBar/utils/DropdownConstants";
 import { EstimationResult, ServiceData } from "@cloud-carbon-footprint/common";
 import { AccountChooser } from "./options/AccountChooser";
@@ -31,8 +31,8 @@ const defaultConfig: FiltersConfig = {
   options: {
     [DropdownFilterOptions.SERVICES]: [ALL_SERVICES_DROPDOWN_OPTION],
     [DropdownFilterOptions.CLOUD_PROVIDERS]: CLOUD_PROVIDER_OPTIONS,
-    [DropdownFilterOptions.ACCOUNTS]: [ALL_ACCOUNTS_DROPDOWN_OPTION]
-  }
+    [DropdownFilterOptions.ACCOUNTS]: [ALL_ACCOUNTS_DROPDOWN_OPTION],
+  },
 };
 
 export class EmissionsFilters extends Filters {
@@ -120,7 +120,7 @@ export class EmissionsFilters extends Filters {
         serviceEstimates: filteredServiceEstimates,
         periodStartDate: estimationResult.periodStartDate,
         periodEndDate: estimationResult.periodEndDate,
-        groupBy: estimationResult.groupBy
+        groupBy: estimationResult.groupBy,
       };
     });
   }
