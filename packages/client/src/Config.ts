@@ -50,12 +50,12 @@ const appConfig: ClientConfig = {
     { key: "aws", name: "AWS" },
     { key: "gcp", name: "GCP" },
     { key: "azure", name: "Azure" },
-    { key: "alicloud", name: "AliCloud" }
+    { key: "alicloud", name: "AliCloud" },
   ],
   PREVIOUS_YEAR_OF_USAGE: previousYearOfUsage,
   DATE_RANGE: {
     VALUE: process.env.REACT_APP_DATE_RANGE_VALUE || "12",
-    TYPE: process.env.REACT_APP_DATE_RANGE_TYPE || "months"
+    TYPE: process.env.REACT_APP_DATE_RANGE_TYPE || "months",
   },
   GROUP_BY: groupBy,
   PAGE_LIMIT: pageLimit,
@@ -65,7 +65,7 @@ const appConfig: ClientConfig = {
   END_DATE: endDate,
   DISABLE_CACHE: process.env.REACT_APP_DISABLE_CACHE === "true",
   DISABLE_FORECAST_VALIDATION: disableForecastValidation,
-  TEST_MODE: process.env.REACT_APP_TEST_MODE === "true"
+  TEST_MODE: process.env.REACT_APP_TEST_MODE === "true",
 };
 
 export default appConfig;
