@@ -17,7 +17,7 @@ const SelectDropdown: FunctionComponent<SelectDropdownProps> = ({
   id,
   value,
   dropdownOptions,
-  handleChange
+  handleChange,
 }): ReactElement => (
   <FormControl variant="outlined">
     <Select
