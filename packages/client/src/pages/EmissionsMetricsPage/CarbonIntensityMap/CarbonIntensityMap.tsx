@@ -25,7 +25,7 @@ const CarbonIntensityMap = (): ReactElement => {
   const intensityMaps: IntensityMaps = {
     AWS: AWSMap,
     GCP: GCPMap,
-    Azure: AzureMap
+    Azure: AzureMap,
     // AliCloud: AliMap TODO: Add Carbon Intensity Map and enable
   };
 
