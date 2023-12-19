@@ -16,7 +16,7 @@ import { Co2eUnit } from "../../Types";
 import { FootprintData } from "../../utils/hooks";
 import {
   checkFootprintDates,
-  sliceFootprintDataByLastMonth
+  sliceFootprintDataByLastMonth,
 } from "../../utils/helpers";
 
 interface RecommendationsPageProps {
@@ -28,7 +28,7 @@ interface RecommendationsPageProps {
 const RecommendationsPage = ({
   onApiError,
   config = loadConfig(),
-  footprint
+  footprint,
 }): ReactElement<RecommendationsPageProps> => {
   const classes = useStyles();
 
@@ -51,7 +51,7 @@ const RecommendationsPage = ({
     baseUrl: config.BASE_URL,
     onApiError,
     groupBy,
-    footprint
+    footprint,
   });
 
   if (recommendations.loading)
