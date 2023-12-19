@@ -6,11 +6,11 @@ import { CSSProperties } from "react";
 import {
   createTheme as createMuiTheme,
   Theme,
-  ThemeOptions
+  ThemeOptions,
 } from "@material-ui/core/styles";
 import {
   Palette,
-  PaletteOptions
+  PaletteOptions,
 } from "@material-ui/core/styles/createPalette";
 
 export type CCFPaletteAdditions = {
@@ -58,7 +58,7 @@ const defaultTheme = () => {
     palette: {
       type: "light",
       background: {
-        default: "#F1F1F1"
+        default: "#F1F1F1",
       },
       chart: [
         // primary
@@ -79,15 +79,15 @@ const defaultTheme = () => {
         { main: "#F038FF" },
         { main: "#EF709D" },
         { main: "#E2EF70" },
-        { main: "#70E4EF" }
+        { main: "#70E4EF" },
       ],
       primaryBlue: "#3F51B5",
       lightBlue: "rgba(63, 81, 181, 0.08)",
       lightTitle: "rgba(0, 0, 0, 0.87)",
       lightMessage: "#b0bec5",
       // leaving this here in case the color theme changes base on dark mode
-      extLink: "#00B7FF"
-    }
+      extLink: "#00B7FF",
+    },
   });
 };
 
