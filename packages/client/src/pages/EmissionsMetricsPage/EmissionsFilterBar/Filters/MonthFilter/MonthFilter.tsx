@@ -9,7 +9,7 @@ import useStyles from "./monthFilterStyles";
 
 const MonthFilter: FunctionComponent<FilterProps> = ({
   filters,
-  setFilters
+  setFilters,
 }) => {
   const classes = useStyles();
   const timeframes: { [label: string]: number } = {
@@ -17,7 +17,7 @@ const MonthFilter: FunctionComponent<FilterProps> = ({
     "3M": 3,
     "6M": 6,
     "12M": 12,
-    All: 36
+    All: 36,
   };
 
   const isCurrentTimeFrame = (time: number): boolean => {
