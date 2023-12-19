@@ -7,13 +7,13 @@ import FilterDropdown from "../../../../../common/FilterDropdown";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterProps
+  FilterProps,
 } from "../../../../../Types";
 
 const ServiceFilter: FunctionComponent<FilterProps> = ({
   filters,
   setFilters,
-  options
+  options,
 }) => {
   const serviceOptions = options.services;
   return (
