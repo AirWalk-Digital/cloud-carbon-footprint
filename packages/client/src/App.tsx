@@ -2,23 +2,23 @@
  * © 2021 Thoughtworks, Inc.
  */
 
-import React, { ReactElement, useCallback, useState } from 'react'
-import { Moment } from 'moment'
-import { AxiosError } from 'axios'
-import { Container } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import EmissionsMetricsPage from './pages/EmissionsMetricsPage'
-import RecommendationsPage from './pages/RecommendationsPage/'
-import ErrorPage from './layout/ErrorPage'
-import HeaderBar from './layout/HeaderBar'
-import MobileWarning from './layout/MobileWarning'
-import { formatAxiosError } from './layout/ErrorPage/ErrorPage'
-import { ClientConfig } from './Config'
-import loadConfig from './ConfigLoader'
-import { useFootprintData } from './utils/hooks'
-import { getEmissionDateRange } from './utils/helpers/handleDates'
-import LoadingMessage from './common/LoadingMessage'
+import React, { ReactElement, useCallback, useState } from "react";
+import { Moment } from "moment";
+import { AxiosError } from "axios";
+import { Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import EmissionsMetricsPage from "./pages/EmissionsMetricsPage";
+import RecommendationsPage from "./pages/RecommendationsPage/";
+import ErrorPage from "./layout/ErrorPage";
+import HeaderBar from "./layout/HeaderBar";
+import MobileWarning from "./layout/MobileWarning";
+import { formatAxiosError } from "./layout/ErrorPage/ErrorPage";
+import { ClientConfig } from "./Config";
+import loadConfig from "./ConfigLoader";
+import { useFootprintData } from "./utils/hooks";
+import { getEmissionDateRange } from "./utils/helpers/handleDates";
+import LoadingMessage from "./common/LoadingMessage";
 
 interface AppProps {
   config?: ClientConfig
