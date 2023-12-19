@@ -6,13 +6,13 @@ import React, {
   useState,
   useEffect,
   PropsWithChildren,
-  ReactElement
+  ReactElement,
 } from "react";
 import {
   ChevronLeft,
   ChevronRight,
   FirstPage,
-  LastPage
+  LastPage,
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import { Page } from "../../../../Types";
@@ -44,7 +44,7 @@ const usePaginateData: <T>(
   }
   return {
     paginatedData,
-    totalPages: paginatedData.length
+    totalPages: paginatedData.length,
   };
 };
 
@@ -53,7 +53,7 @@ const Pagination: <T>(
 ) => ReactElement = ({ data, pageSize, handlePage }) => {
   const { paginationContainer, paginationLabel } = useStyles();
   const [page, setPage] = useState(0);
-  const { paginatedData, totalPages } = usePaginateData<typeof data[0]>(
+  const { paginatedData, totalPages } = usePaginateData<typeof data[0]>(,
     data,
     pageSize
   );
