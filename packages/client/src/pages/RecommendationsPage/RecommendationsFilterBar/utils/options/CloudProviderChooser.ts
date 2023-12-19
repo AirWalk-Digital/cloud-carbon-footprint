@@ -5,7 +5,7 @@
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions
+  FilterOptions,
 } from "../../../../../Types";
 import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
 import { CLOUD_PROVIDER_OPTIONS } from "../../../../../common/FilterBar/utils/DropdownConstants";
@@ -35,7 +35,7 @@ export class CloudProviderChooser extends OptionChooser {
       [DropdownFilterOptions.RECOMMENDATION_TYPES]: () =>
         this.chooseDropdownFilterOption(
           DropdownFilterOptions.RECOMMENDATION_TYPES
-        )
+        ),
     };
   }
 }
