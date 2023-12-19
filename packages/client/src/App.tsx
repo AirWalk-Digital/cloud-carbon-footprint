@@ -21,26 +21,26 @@ import { getEmissionDateRange } from "./utils/helpers/handleDates";
 import LoadingMessage from "./common/LoadingMessage";
 
 interface AppProps {
-  config?: ClientConfig
+  config?: ClientConfig;
 }
 export function App({ config = loadConfig() }: AppProps): ReactElement {
-  const [errorMessage, setErrorMessage] = useState('')
-  const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const onApiError = useCallback(
     (e: AxiosError) => {
-      console.error(e)
-      setErrorMessage(e.response.data)
-      navigate('/error', { state: formatAxiosError(e) })
+      console.error(e);
+      setErrorMessage(e.response.data);
+      navigate("/error", { state: formatAxiosError(e) });
     },
-    [navigate],
-  )
+    [navigate]
+  );
 
   const endDate: Moment = getEmissionDateRange({
     config: loadConfig(),
-  }).end
+  }).end;
   const startDate: Moment = getEmissionDateRange({
     config: loadConfig(),
-  }).start
+  }).start;
 
   const footprint = useFootprintData({
     baseUrl: config.BASE_URL,
@@ -50,24 +50,24 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
     groupBy: config.GROUP_BY,
     limit: parseInt(config.PAGE_LIMIT as unknown as string),
     ignoreCache: config.DISABLE_CACHE,
-  })
+  });
 
   const [mobileWarningEnabled, setMobileWarningEnabled] = useState(
-    window.innerWidth < 768,
-  )
+    window.innerWidth < 768
+  );
 
   const handleWarningClose = () => {
-    setMobileWarningEnabled(false)
-  }
+    setMobileWarningEnabled(false);
+  };
 
   const useStyles = makeStyles(() => ({
     appContainer: {
       padding: 0,
-      height: 'calc(100vh - 65px)',
+      height: "calc(100vh - 65px)",
     },
-  }))
+  }));
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   if (mobileWarningEnabled) {
     return (
@@ -75,7 +75,7 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
         <HeaderBar />
         <MobileWarning handleClose={handleWarningClose} />
       </Container>
-    )
+    );
   }
 
   if (footprint.loading)
@@ -84,7 +84,7 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
         <HeaderBar />
         <LoadingMessage message="Loading cloud data. This may take a while..." />
       </>
-    )
+    );
 
   return (
     <>
@@ -119,5 +119,5 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
         </Routes>
       </Container>
     </>
-  )
+  );
 }
