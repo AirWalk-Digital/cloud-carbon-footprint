@@ -9,7 +9,7 @@ const useStyles = makeStyles(({ palette }) => ({
     height: "100%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   title: {
     margin: "0",
@@ -18,11 +18,11 @@ const useStyles = makeStyles(({ palette }) => ({
     opacity: "1",
     fontWeight: 900,
     color: "rgba(0, 0, 0, 0.87)",
-    paddingLeft: 0
+    paddingLeft: 0,
   },
   card: {
     height: 350,
-    textAlign: "center"
+    textAlign: "center",
   },
   contentContainer: {
     padding: 15,
@@ -30,16 +30,16 @@ const useStyles = makeStyles(({ palette }) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    gap: 20
+    gap: 20,
   },
   icon: {
     width: 120,
     height: 120,
-    color: palette.primary.main
+    color: palette.primary.main,
   },
   closeButtonContainer: {
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 }));
 
 export default useStyles;
