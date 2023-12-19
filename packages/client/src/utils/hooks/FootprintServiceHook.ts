@@ -59,8 +59,8 @@ const useRemoteFootprintService = (
               ignoreCache: params.ignoreCache,
               groupBy: params.groupBy,
               limit: params.limit,
-              skip
-            }
+              skip,
+            },
           });
           lastDataLength = checkForLoopExit(
             lastDataLength,
@@ -94,7 +94,7 @@ const useRemoteFootprintService = (
     setError,
     params.baseUrl,
     params.groupBy,
-    params.limit
+    params.limit,
   ]);
 
   return { data, loading, error };
