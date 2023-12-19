@@ -20,7 +20,7 @@ type CustomTooltipProps = {
 
 const CustomTooltip = ({
   dataPoint,
-  grouping
+  grouping,
 }: CustomTooltipProps): ReactElement => {
   if (dataPoint?.x) {
     const dateLabel = {
@@ -28,7 +28,7 @@ const CustomTooltip = ({
       week: moment.utc(dataPoint.x).format("[Week] w, MMM"),
       month: moment.utc(dataPoint.x).format("MMM YYYY"),
       quarter: moment.utc(dataPoint.x).format("Qo [Quarter] YYYY"),
-      year: moment.utc(dataPoint.x).format("YYYY")
+      year: moment.utc(dataPoint.x).format("YYYY"),
     };
     return (
       <div style={{ padding: "10px" }}>
