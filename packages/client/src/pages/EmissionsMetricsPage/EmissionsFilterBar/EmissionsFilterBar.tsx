@@ -8,7 +8,7 @@ import {
   ALL_ACCOUNTS_DROPDOWN_OPTION,
   ALL_SERVICES_DROPDOWN_OPTION,
   buildAndOrderDropdownOptions,
-  CLOUD_PROVIDER_OPTIONS
+  CLOUD_PROVIDER_OPTIONS,
 } from "../../../common/FilterBar/utils/DropdownConstants";
 import FilterBar from "../../../common/FilterBar";
 import {
@@ -16,13 +16,13 @@ import {
   CloudProviderFilter,
   DateFilter,
   MonthFilter,
-  ServiceFilter
+  ServiceFilter,
 } from "./Filters";
 
 const EmissionsFilterBar: FunctionComponent<FilterBarProps> = ({
   filters,
   setFilters,
-  filterOptions
+  filterOptions,
 }): ReactElement => {
   const getFilterOptions = (): FilterOptions => {
     const allAccountDropdownOptions = buildAndOrderDropdownOptions(
@@ -31,7 +31,7 @@ const EmissionsFilterBar: FunctionComponent<FilterBarProps> = ({
     );
     const accountOptions: DropdownOption[] = [
       ALL_ACCOUNTS_DROPDOWN_OPTION,
-      ...allAccountDropdownOptions
+      ...allAccountDropdownOptions,
     ];
 
     const allServiceDropdownOptions = buildAndOrderDropdownOptions(
@@ -40,13 +40,13 @@ const EmissionsFilterBar: FunctionComponent<FilterBarProps> = ({
     );
     const serviceOptions: DropdownOption[] = [
       ALL_SERVICES_DROPDOWN_OPTION,
-      ...allServiceDropdownOptions
+      ...allServiceDropdownOptions,
     ];
 
     return {
       accounts: accountOptions,
       services: serviceOptions,
-      cloudProviders: CLOUD_PROVIDER_OPTIONS
+      cloudProviders: CLOUD_PROVIDER_OPTIONS,
     };
   };
 
@@ -55,12 +55,12 @@ const EmissionsFilterBar: FunctionComponent<FilterBarProps> = ({
     AccountFilter,
     ServiceFilter,
     DateFilter,
-    MonthFilter
+    MonthFilter,
   ];
   const filterConfig = {
     filters,
     setFilters,
-    filterOptions: getFilterOptions()
+    filterOptions: getFilterOptions(),
   };
 
   return <FilterBar config={filterConfig} components={filterComponents} />;
