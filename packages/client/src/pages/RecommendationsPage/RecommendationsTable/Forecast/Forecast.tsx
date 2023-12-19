@@ -45,7 +45,7 @@ export const ForecastError = {
 } as const;
 
 export type ForecastErrorType =
-  typeof ForecastError[keyof (typeof ForecastError)];
+  typeof ForecastError[keyof typeof ForecastError];
 
 const Forecast: FunctionComponent<ForecastProps> = ({
   emissionsData,
