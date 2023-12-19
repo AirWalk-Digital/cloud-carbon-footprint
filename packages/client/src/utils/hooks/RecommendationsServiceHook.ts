@@ -36,8 +36,8 @@ const useRemoteRecommendationsService = (
         const res = params.awsRecommendationTarget
           ? await axios.get(`${params.baseUrl}/recommendations`, {
               params: {
-                awsRecommendationTarget: params.awsRecommendationTarget
-              }
+                awsRecommendationTarget: params.awsRecommendationTarget,
+              },
             })
           : await axios.get(`${params.baseUrl}/recommendations`);
         setData(res.data);
