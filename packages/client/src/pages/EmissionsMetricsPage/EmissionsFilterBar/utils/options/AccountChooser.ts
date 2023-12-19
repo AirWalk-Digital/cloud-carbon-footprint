@@ -6,7 +6,7 @@ import { pluck } from "ramda";
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions
+  FilterOptions,
 } from "../../../../../Types";
 import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
 
@@ -30,7 +30,7 @@ export class AccountChooser extends OptionChooser {
     this.choosers = {
       [DropdownFilterOptions.CLOUD_PROVIDERS]: () => this.chooseProviders(),
       [DropdownFilterOptions.ACCOUNTS]: () => this.chooseCurrentFilterOption(),
-      [DropdownFilterOptions.SERVICES]: () => this.chooseServices()
+      [DropdownFilterOptions.SERVICES]: () => this.chooseServices(),
     };
   }
 
