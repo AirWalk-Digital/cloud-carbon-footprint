@@ -4,7 +4,7 @@
 
 import React, { FunctionComponent } from "react";
 import FilterDropdown from "../../common/FilterDropdown";
-import { DropdownFilterOptions, DropdownOption, FilterProps } from "../../Types";
+import { DropdownFilterOptions, DropdownOption, FilterProps, } from "../../Types";
 
 const AccountFilter: FunctionComponent<FilterProps> = ({
   filters,
