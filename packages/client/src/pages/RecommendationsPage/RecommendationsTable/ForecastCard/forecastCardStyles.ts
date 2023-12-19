@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   titleContainer: {
     backgroundColor: "#3F51B5",
@@ -24,33 +24,33 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 5
+    marginBottom: 5,
   },
   title: {
     fontStyle: "normal",
     fontWeight: "normal",
     textAlign: "center",
     fontSize: 20,
-    color: "white"
+    color: "white",
   },
   textContent: {
     fontSize: 36,
-    textAlign: "center"
+    textAlign: "center",
   },
   co2eSavings: {
-    lineHeight: 1.1
+    lineHeight: 1.1,
   },
   costSavings: {
-    lineHeight: 1
+    lineHeight: 1,
   },
   unitsText: {
     textAlign: "center",
-    fontSize: 16
+    fontSize: 16,
   },
   divider: {
     backgroundColor: "#3F51B5",
     width: "75%",
-    height: 4
+    height: 4,
   },
   contentContainer: {
     display: "flex",
@@ -60,16 +60,16 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "white",
     width: "100%",
     height: "100%",
-    gap: 30
+    gap: 30,
   },
   contentWithBadge: {
-    gap: 25
+    gap: 25,
   },
   numberContainer: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
 export default useStyles;
