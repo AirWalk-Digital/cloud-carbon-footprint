@@ -4,7 +4,7 @@
 
 import {
   RecommendationResult,
-  ServiceData
+  ServiceData,
 } from "@cloud-carbon-footprint/common";
 import { Filters } from "../../../../common/FilterBar/utils/Filters";
 import {
@@ -14,11 +14,11 @@ import {
   FilterOptions,
   FilterResultResponse,
   FiltersConfig,
-  unknownOptionTypes
+  unknownOptionTypes,
 } from "../../../../Types";
 import {
   ALL_DROPDOWN_FILTER_OPTIONS,
-  CLOUD_PROVIDER_OPTIONS
+  CLOUD_PROVIDER_OPTIONS,
 } from "../../../../common/FilterBar/utils/DropdownConstants";
 import { DropdownSelections } from "../../../../common/FilterBar/utils/FiltersUtil";
 import { OptionChooser } from "../../../../common/FilterBar/utils/OptionChooser";
@@ -35,9 +35,9 @@ const defaultConfig: FiltersConfig = {
     [DropdownFilterOptions.CLOUD_PROVIDERS]: CLOUD_PROVIDER_OPTIONS,
     [DropdownFilterOptions.REGIONS]: [ALL_DROPDOWN_FILTER_OPTIONS.regions],
     [DropdownFilterOptions.RECOMMENDATION_TYPES]: [
-      ALL_DROPDOWN_FILTER_OPTIONS.recommendationTypes
-    ]
-  }
+      ALL_DROPDOWN_FILTER_OPTIONS.recommendationTypes,
+    ],
+  },
 };
 
 export class RecommendationsFilters extends Filters {
@@ -133,7 +133,7 @@ export class RecommendationsFilters extends Filters {
     const typeFilterOptionMap = {
       [DropdownFilterOptions.ACCOUNTS]: "accountName",
       [DropdownFilterOptions.RECOMMENDATION_TYPES]: "recommendationType",
-      [DropdownFilterOptions.REGIONS]: "region"
+      [DropdownFilterOptions.REGIONS]: "region",
     };
 
     const name = typeFilterOptionMap[type];
