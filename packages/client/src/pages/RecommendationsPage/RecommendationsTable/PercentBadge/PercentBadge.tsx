@@ -31,7 +31,7 @@ const PercentBadge: FunctionComponent<PercentBadgeProps> = ({ amount }) => {
 
   const containerClass = clsx(classes.badgeContainer, {
     [classes.increasingBadge]: amount < 0,
-    [classes.noChangeBadge]: amount === 0
+    [classes.noChangeBadge]: amount === 0,
   });
 
   return (
