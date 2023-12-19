@@ -8,7 +8,7 @@ import {
   CardActions,
   CardContent,
   Link,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { OpenInNew } from "@material-ui/icons";
 import { ComparisonItem } from "../../../../Types";
@@ -29,7 +29,7 @@ const CarbonComparison: FunctionComponent<CarbonComparisonProps> = ({
   comparisons,
   selection,
   updateSelection,
-  updateButtonColor
+  updateButtonColor,
 }): ReactElement => {
   const classes = useStyles();
   const currentSource = comparisons[selection].source;
