@@ -27,7 +27,7 @@ type CarbonComparisonCardProps = {
 };
 
 const CarbonComparisonCard: FunctionComponent<CarbonComparisonCardProps> = ({
-  data
+  data,
 }) => {
   const [selection, setSelection] = useState("flights");
   const classes = useStyles();
@@ -54,12 +54,12 @@ const CarbonComparisonCard: FunctionComponent<CarbonComparisonCardProps> = ({
   const sources: { [name: string]: Source } = {
     epa: {
       href: "https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator",
-      title: "EPA Equivalencies Calculator"
+      title: "EPA Equivalencies Calculator",
     },
     flightCalculator: {
       href: "https://calculator.carbonfootprint.com/calculator.aspx?tab=3",
-      title: "Flight Carbon Footprint Calculator"
-    }
+      title: "Flight Carbon Footprint Calculator",
+    },
   };
 
   const comparisons: Comparisons = {
@@ -70,22 +70,22 @@ const CarbonComparisonCard: FunctionComponent<CarbonComparisonCardProps> = ({
       total: totalFlights,
       textOne: "CO2e emissions from",
       textTwo: "direct one way flights from NYC to London",
-      source: sources.flightCalculator
+      source: sources.flightCalculator,
     },
     phones: {
       icon: <PhonelinkRing className={classes.icon} data-testid="phonesIcon" />,
       total: totalPhones,
       textOne: "CO2e emissions from",
       textTwo: "smartphones charged",
-      source: sources.epa
+      source: sources.epa,
     },
     trees: {
       icon: <Eco className={classes.icon} data-testid="treesIcon" />,
       total: totalTrees,
       textOne: "carbon sequestered by",
       textTwo: "tree seedlings grown for 10 years",
-      source: sources.epa
-    }
+      source: sources.epa,
+    },
   };
 
   const updateSelection = (selection: Selection) => {
