@@ -14,7 +14,7 @@ import {
   filterLabels,
   FiltersConfig,
   MaybeFiltersDateRange,
-  FilterResults
+  FilterResults,
 } from "../../../Types";
 import { DropdownSelections } from "./FiltersUtil";
 import { OptionChooser } from "./OptionChooser";
@@ -66,11 +66,11 @@ export abstract class Filters {
       (option) =>
         (updatedOptions[option] = [
           ALL_DROPDOWN_FILTER_OPTIONS[option],
-          ...newOptions[option]
+          ...newOptions[option],
         ])
     );
     const configUpdates = {
-      options: { ...updatedOptions }
+      options: { ...updatedOptions },
     };
 
     return Object.assign(oldConfig, configUpdates);
@@ -98,8 +98,8 @@ export abstract class Filters {
     return this.create({
       ...this,
       options: {
-        ...FiltersUtil.handleDropdownSelections(optionChooser)
-      }
+        ...FiltersUtil.handleDropdownSelections(optionChooser),
+      },
     });
   }
 
@@ -108,12 +108,12 @@ export abstract class Filters {
       return this.create({
         ...this,
         timeframe: -1,
-        dateRange
+        dateRange,
       });
     } else {
       return this.create({
         ...this,
-        dateRange
+        dateRange,
       });
     }
   }
