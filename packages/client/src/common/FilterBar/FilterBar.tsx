@@ -7,7 +7,7 @@ import React, {
   Dispatch,
   FunctionComponent,
   ReactElement,
-  SetStateAction
+  SetStateAction,
 } from "react";
 import useStyles from "./filterBarStyles";
 import { FilterOptions, FilterProps } from "../../Types";
@@ -28,7 +28,7 @@ type FilterBarProps = {
 const FilterBar: FunctionComponent<FilterBarProps> = ({
   config,
   components,
-  suffixComponent
+  suffixComponent,
 }) => {
   const classes = useStyles();
   return (
