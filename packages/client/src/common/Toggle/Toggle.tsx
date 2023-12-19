@@ -13,7 +13,7 @@ type ToggleProps = {
 
 const Toggle: FunctionComponent<ToggleProps> = ({
   label,
-  handleToggle
+  handleToggle,
 }): ReactElement => {
   const classes = useStyles();
   return (
