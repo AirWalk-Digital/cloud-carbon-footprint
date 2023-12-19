@@ -23,17 +23,17 @@ const useStyles = makeStyles(() => ({
     marginTop: 5,
     borderRadius: 3,
     "& p": {
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   increasingBadge: {
     backgroundColor: lightNegative,
-    color: darkNegative
+    color: darkNegative,
   },
   noChangeBadge: {
     backgroundColor: "#EDEDED",
-    color: "black"
-  }
+    color: "black",
+  },
 }));
 
 export default useStyles;
