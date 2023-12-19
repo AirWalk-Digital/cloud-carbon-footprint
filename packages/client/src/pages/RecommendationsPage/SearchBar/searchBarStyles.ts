@@ -9,9 +9,9 @@ const useStyles = makeStyles(() => ({
     minWidth: "50%",
     // Nested selector for child input element
     "& $input": {
-      padding: 10
-    }
-  }
+      padding: 10,
+    },
+  },
 }));
 
 export default useStyles;
