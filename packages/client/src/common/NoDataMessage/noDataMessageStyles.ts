@@ -16,21 +16,21 @@ const useStyles = makeStyles<CCFTheme>(({ palette, spacing }) => ({
     textAlign: "center",
     fontSize: "24px",
     padding: spacing(1, 2),
-    color: palette.lightMessage
+    color: palette.lightMessage,
   },
   boldRoot: {
-    height: "74%"
+    height: "74%",
   },
   smallText: {
-    fontSize: "17px"
+    fontSize: "17px",
   },
   addSpacing: {
-    marginTop: "50px"
+    marginTop: "50px",
   },
   largeMessage: {
     height: 587,
     fontWeight: 900,
-    fontSize: 24
+    fontSize: 24,
   },
   boldTitleContainer: {
     display: "flex",
@@ -39,15 +39,15 @@ const useStyles = makeStyles<CCFTheme>(({ palette, spacing }) => ({
     backgroundColor: palette.primary.main,
     textAlign: "center",
     borderRadius: "12px 12px 0 0",
-    minHeight: 100
+    minHeight: 100,
   },
   boldTitle: {
     color: palette.primary.contrastText,
     fontWeight: 700,
     fontSize: 24,
     fontFamily: "Helvetica, Arial, sans-serif",
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
 }));
 
 export default useStyles;
