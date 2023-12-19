@@ -2,7 +2,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import { Moment } from "moment";
