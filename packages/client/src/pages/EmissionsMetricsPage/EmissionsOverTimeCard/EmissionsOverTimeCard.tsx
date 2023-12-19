@@ -13,7 +13,7 @@ type EmissionsOverTimeProps = {
 };
 
 const EmissionsOverTimeCard: FunctionComponent<EmissionsOverTimeProps> = ({
-  data
+  data,
 }): ReactElement =>
   data.length ? (
     <DashboardCard testId="cloudUsage">
