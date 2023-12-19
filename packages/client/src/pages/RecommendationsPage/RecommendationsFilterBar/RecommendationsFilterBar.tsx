@@ -7,14 +7,14 @@ import {
   Co2eUnit,
   DropdownOption,
   FilterBarProps,
-  FilterOptions
+  FilterOptions,
 } from "../../../Types";
 import {
   ALL_ACCOUNTS_DROPDOWN_OPTION,
   ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION,
   ALL_REGIONS_DROPDOWN_OPTION,
   buildAndOrderDropdownOptions,
-  CLOUD_PROVIDER_OPTIONS
+  CLOUD_PROVIDER_OPTIONS,
 } from "../../../common/FilterBar/utils/DropdownConstants";
 import FilterBar from "../../../common/FilterBar";
 import AccountFilter from "../../../common/AccountFilter";
@@ -27,7 +27,7 @@ const RecommendationsFilterBar: FunctionComponent<FilterBarProps> = ({
   filters,
   setFilters,
   filterOptions,
-  setCo2eUnit
+  setCo2eUnit,
 }): ReactElement => {
   const getFilterOptions = (): FilterOptions => {
     const allAccountDropdownOptions = buildAndOrderDropdownOptions(
@@ -37,7 +37,7 @@ const RecommendationsFilterBar: FunctionComponent<FilterBarProps> = ({
 
     const accountOptions: DropdownOption[] = [
       ALL_ACCOUNTS_DROPDOWN_OPTION,
-      ...allAccountDropdownOptions
+      ...allAccountDropdownOptions,
     ];
 
     const allRegionDropdownOptions = buildAndOrderDropdownOptions(
@@ -47,7 +47,7 @@ const RecommendationsFilterBar: FunctionComponent<FilterBarProps> = ({
 
     const regionOptions: DropdownOption[] = [
       ALL_REGIONS_DROPDOWN_OPTION,
-      ...allRegionDropdownOptions
+      ...allRegionDropdownOptions,
     ];
 
     const allRecommendationTypeOptions = buildAndOrderDropdownOptions(
@@ -57,14 +57,14 @@ const RecommendationsFilterBar: FunctionComponent<FilterBarProps> = ({
 
     const recommendationTypeOptions: DropdownOption[] = [
       ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION,
-      ...allRecommendationTypeOptions
+      ...allRecommendationTypeOptions,
     ];
 
     return {
       accounts: accountOptions,
       cloudProviders: CLOUD_PROVIDER_OPTIONS,
       regions: regionOptions,
-      recommendationTypes: recommendationTypeOptions
+      recommendationTypes: recommendationTypeOptions,
     };
   };
 
@@ -79,13 +79,13 @@ const RecommendationsFilterBar: FunctionComponent<FilterBarProps> = ({
     CloudProviderFilter,
     AccountFilter,
     RegionFilter,
-    RecommendationTypeFilter
+    RecommendationTypeFilter,
   ];
 
   const filterConfig = {
     filters,
     setFilters,
-    filterOptions: getFilterOptions()
+    filterOptions: getFilterOptions(),
   };
 
   const suffixComponents = (
