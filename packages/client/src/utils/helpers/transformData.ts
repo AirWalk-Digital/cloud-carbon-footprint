@@ -7,7 +7,7 @@ import { pluck, uniq } from "ramda";
 import {
   EstimationResult,
   RecommendationResult,
-  ServiceData
+  ServiceData,
 } from "@cloud-carbon-footprint/common";
 import {
   ChartDataTypes,
@@ -16,7 +16,7 @@ import {
   DropdownOption,
   EmissionsAndRecommendationResults,
   FilterResultResponse,
-  UnknownTypes
+  UnknownTypes,
 } from "../../Types";
 import { co2eUnitMultiplier } from "./units";
 
@@ -48,24 +48,24 @@ const sumServiceTotals = (
       y: roundNumberBasedOnSize(total, 4),
       usesAverageCPUConstant: usesAverageCPUConstant,
       cost: roundNumberBasedOnSize(totalCost, 2),
-      kilowattHours: roundNumberBasedOnSize(totalWattHours, 2)
+      kilowattHours: roundNumberBasedOnSize(totalWattHours, 2),
     });
 
     kilowattHoursSeries.push({
       x: estimationResult.timestamp,
-      y: roundNumberBasedOnSize(totalWattHours, 2)
+      y: roundNumberBasedOnSize(totalWattHours, 2),
     });
 
     costSeries.push({
       x: estimationResult.timestamp,
-      y: roundNumberBasedOnSize(totalCost, 2)
+      y: roundNumberBasedOnSize(totalCost, 2),
     });
   });
 
   return {
     co2Series,
     kilowattHoursSeries,
-    costSeries
+    costSeries,
   };
 };
 
@@ -92,7 +92,7 @@ const getPropertyFromDataType = (
   const dataTypeMapping: { [key: string]: string } = {
     [ChartDataTypes.REGION]: value.region,
     [ChartDataTypes.SERVICE]: value.serviceName,
-    [ChartDataTypes.ACCOUNT]: value.accountName
+    [ChartDataTypes.ACCOUNT]: value.accountName,
   };
 
   return dataTypeMapping[dataType];
@@ -172,7 +172,7 @@ const calculatePercentChange = (
 
 const formattedNumberWithCommas = (num: number, decimalPlaces = 2): string =>
   num.toLocaleString(undefined, {
-    maximumFractionDigits: decimalPlaces
+    maximumFractionDigits: decimalPlaces,
   });
 
 const useFilterDataFromEstimates = (
@@ -192,18 +192,18 @@ const useFilterDataFromEstimates = (
       accountNames.push({
         cloudProvider: cloudProvider?.toLowerCase(),
         key: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
-        name: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`
+        name: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
       });
 
       serviceNames.push({
         cloudProvider: cloudProvider?.toLowerCase(),
         key: serviceName ? serviceName : `${UnknownTypes.UNKNOWN_SERVICE}`,
-        name: serviceName ? serviceName : `${UnknownTypes.UNKNOWN_SERVICE}`
+        name: serviceName ? serviceName : `${UnknownTypes.UNKNOWN_SERVICE}`,
       });
     });
     setFilterResultResponse({
       accounts: uniq(accountNames),
-      services: uniq(serviceNames)
+      services: uniq(serviceNames),
     });
   }, [data]);
 
@@ -218,7 +218,7 @@ const useFilterDataFromRecommendations = (
     useState<FilterResultResponse>({
       accounts: [],
       regions: [],
-      recommendationTypes: []
+      recommendationTypes: [],
     });
 
   useEffect(() => {
@@ -235,12 +235,12 @@ const useFilterDataFromRecommendations = (
         accountNames.push({
           cloudProvider: cloudProvider?.toLowerCase(),
           key: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
-          name: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`
+          name: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
         });
         regions.push({
           cloudProvider: cloudProvider?.toLowerCase(),
           key: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
-          name: region ? region : `${UnknownTypes.UNKNOWN_REGION}`
+          name: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
         });
         if (dataType === "recommendations") {
           const { recommendationType } = result;
@@ -251,7 +251,7 @@ const useFilterDataFromRecommendations = (
               : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`,
             name: recommendationType
               ? recommendationType
-              : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`
+              : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`,
           });
         }
       });
@@ -260,7 +260,7 @@ const useFilterDataFromRecommendations = (
     setFilterResultResponse({
       accounts: uniq(accountNames),
       regions: uniq(regions),
-      recommendationTypes: uniq(recommendationTypes)
+      recommendationTypes: uniq(recommendationTypes),
     });
   }, [data.recommendations, filteredData]);
 
@@ -276,7 +276,7 @@ const useFilterDataFromRecommendations = (
  */
 function tableFormatNearZero(rawValue: number): string {
   const formattedValue = rawValue.toLocaleString(undefined, {
-    maximumFractionDigits: 3
+    maximumFractionDigits: 3,
   });
   return formattedValue === "0" && rawValue > 0 ? "< 0.001" : formattedValue;
 }
@@ -302,5 +302,5 @@ export {
   useFilterDataFromEstimates,
   useFilterDataFromRecommendations,
   tableFormatNearZero,
-  tableFormatRawCo2e
+  tableFormatRawCo2e,
 };
