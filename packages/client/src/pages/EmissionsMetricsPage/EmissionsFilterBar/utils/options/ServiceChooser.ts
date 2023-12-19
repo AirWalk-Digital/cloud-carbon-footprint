@@ -5,7 +5,7 @@
 import {
   DropdownFilterOptions,
   DropdownOption,
-  FilterOptions
+  FilterOptions,
 } from "../../../../../Types";
 import { DropdownSelections } from "../../../../../common/FilterBar/utils/FiltersUtil";
 import { CLOUD_PROVIDER_OPTIONS } from "../../../../../common/FilterBar/utils/DropdownConstants";
@@ -29,7 +29,7 @@ export class ServiceChooser extends OptionChooser {
     this.choosers = {
       [DropdownFilterOptions.CLOUD_PROVIDERS]: () => this.chooseProviders(),
       [DropdownFilterOptions.ACCOUNTS]: () => this.chooseAccounts(),
-      [DropdownFilterOptions.SERVICES]: () => this.chooseCurrentFilterOption()
+      [DropdownFilterOptions.SERVICES]: () => this.chooseCurrentFilterOption(),
     };
   }
 
