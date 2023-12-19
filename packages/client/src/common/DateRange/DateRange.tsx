@@ -12,7 +12,7 @@ type DateRangeProps = {
 };
 
 const DateRange: FunctionComponent<DateRangeProps> = ({
-  lookBackPeriodDays
+  lookBackPeriodDays,
 }): ReactElement => {
   const classes = useStyles();
   const today = moment().utc();
