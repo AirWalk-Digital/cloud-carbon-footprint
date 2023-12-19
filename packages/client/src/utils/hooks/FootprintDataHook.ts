@@ -2,7 +2,7 @@ import { EstimationResult } from "@cloud-carbon-footprint/common";
 import { FilterResultResponse } from "../../Types";
 import { EmissionsFilters } from "../../pages/EmissionsMetricsPage/EmissionsFilterBar/utils/EmissionsFilters";
 import useRemoteFootprintService, {
-  UseRemoteFootprintServiceParams
+  UseRemoteFootprintServiceParams,
 } from "./FootprintServiceHook";
 
 export interface FootprintData {
@@ -19,7 +19,7 @@ export const useFootprintData = (
   return {
     data,
     error,
-    loading
+    loading,
   };
 };
 
