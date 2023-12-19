@@ -13,7 +13,7 @@ type MobileWarningProps = {
 };
 
 const MobileWarning: FunctionComponent<MobileWarningProps> = ({
-  handleClose
+  handleClose,
 }): ReactElement => {
   const classes = useStyles();
 
