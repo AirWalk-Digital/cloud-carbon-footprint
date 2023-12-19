@@ -5,7 +5,7 @@
 import {
   useGridApiContext,
   useGridState,
-  GridToolbarContainer
+  GridToolbarContainer,
 } from "@mui/x-data-grid";
 import Pagination from "@material-ui/lab/Pagination";
 import { Box, MenuItem, Select, Typography } from "@material-ui/core";
@@ -17,7 +17,7 @@ type CustomPaginationProps = {
 };
 
 const CustomPagination: FunctionComponent<CustomPaginationProps> = ({
-  handlePageSizeChange
+  handlePageSizeChange,
 }): ReactElement => {
   const apiRef = useGridApiContext();
   const [state] = useGridState(apiRef);
