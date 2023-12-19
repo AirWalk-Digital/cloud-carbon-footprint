@@ -11,13 +11,13 @@ const useStyles = makeStyles(({ palette }) => {
       display: "flex",
       width: "100%",
       justifyContent: "flex-end",
-      alignItems: "center"
+      alignItems: "center",
     },
     paginationLabel: {
       color: palette.grey.A200,
       fontWeight: 700,
-      marginRight: "8px"
-    }
+      marginRight: "8px",
+    },
   };
 });
 
