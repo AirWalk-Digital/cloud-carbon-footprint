@@ -12,14 +12,14 @@ const useStyles = makeStyles<CCFTheme>(({ palette }) => ({
     fontSize: 13,
     backgroundColor: palette.common.white,
     "&:hover": {
-      backgroundColor: palette.common.white
-    }
+      backgroundColor: palette.common.white,
+    },
   },
   helpIcon: {
     padding: 0,
     height: 24,
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
 }));
 
 export const TextOnlyTooltip = withStyles({
@@ -31,11 +31,11 @@ export const TextOnlyTooltip = withStyles({
     fontWeight: "normal",
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     boxShadow: "1px 1px 5px #E6E6E6",
-    borderRadius: "5px"
+    borderRadius: "5px",
   },
   arrow: {
-    color: "#E6E6E6"
-  }
+    color: "#E6E6E6",
+  },
 })(MaterialTooltip);
 
 export default useStyles;
