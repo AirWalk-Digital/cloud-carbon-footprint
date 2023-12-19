@@ -12,13 +12,13 @@ const BootstrapInput = withStyles(() =>
       padding: "10px 26px 10px 12px",
       width: "65px",
       "&:hover": {
-        borderColor: "black"
+        borderColor: "black",
       },
       "&:focus": {
         backgroundColor: "white",
-        borderRadius: 4
-      }
-    }
+        borderRadius: 4,
+      },
+    },
   })
 )(InputBase);
 
