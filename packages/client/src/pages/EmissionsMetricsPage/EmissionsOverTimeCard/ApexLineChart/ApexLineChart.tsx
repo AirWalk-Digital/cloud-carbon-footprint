@@ -15,7 +15,7 @@ import { ApexChartProps, DateRange } from "../../../../Types";
 import { getChartColors, CCFTheme } from "../../../../utils/themes";
 import {
   sumServiceTotals,
-  getMaxOfDataSeries
+  getMaxOfDataSeries,
 } from "../../../../utils/helpers";
 import { filterBy, sortByDate } from "./helpers";
 import CustomTooltip from "./CustomTooltip";
@@ -31,17 +31,17 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
 
   const [dateRange, setDateRange] = React.useState<DateRange>({
     min: null,
-    max: null
+    max: null,
   });
   const [chartData, setChartData] = React.useState<EstimationResult[]>([]);
   const [defaultRange, setDefaultRange] = React.useState<DateRange>({
     min: null,
-    max: null
+    max: null,
   });
   const [toggledSeries, setToggledSeries] = React.useState<LegendToggle[]>([
     { CO2e: true },
     { "Kilowatt Hours": false },
-    { Cost: false }
+    { Cost: false },
   ]);
 
   const filteredByZoomRange = filterBy(chartData, dateRange, defaultRange);
@@ -67,7 +67,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
     week: "[Week] w, MMM",
     month: "MMM YYYY",
     quarter: "Qo [Quarter] YYYY",
-    year: "YYYY"
+    year: "YYYY",
   };
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
       : null;
     const newDefaultRange = {
       min,
-      max
+      max,
     };
 
     if (!equals(chartData, newSortedData)) setChartData(newSortedData);
@@ -104,24 +104,24 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
     ApexCharts.exec("lineChart", "updateSeries", [
       {
         name: "CO2e",
-        data: co2SeriesData
+        data: co2SeriesData,
       },
       {
         name: "Kilowatt Hours",
-        data: kilowattHoursSeriesData
+        data: kilowattHoursSeriesData,
       },
       {
         name: "Cost",
-        data: costSeriesData
-      }
+        data: costSeriesData,
+      },
     ]);
 
     ApexCharts.exec("lineChart", "updateOptions", [
       {
         xaxis: {
-          category: global.labels
-        }
-      }
+          category: global.labels,
+        },
+      },
     ]);
 
     toggledSeries.forEach((legendToggle: LegendToggle) => {
@@ -135,7 +135,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const options: any = {
     markers: {
-      size: 5
+      size: 5,
     },
     chart: {
       events: {
@@ -145,11 +145,11 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           if (newFilteredData.length >= 2) {
             setDateRange(xaxis);
             return {
-              xaxis
+              xaxis,
             };
           }
           return {
-            dateRange
+            dateRange,
           };
         },
         beforeResetZoom: () => {
@@ -164,7 +164,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           );
           const newToggledSeries = [...toggledSeries];
           newToggledSeries[seriesIndex] = {
-            [seriesKey]: !toggledValue
+            [seriesKey]: !toggledValue,
           };
           setToggledSeries(newToggledSeries);
           if (
@@ -172,7 +172,7 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
             Object.keys(toggleCheck[0])[0] === seriesKey
           )
             setToggledSeries(toggledSeries);
-        }
+        },
       },
       id: "lineChart",
       background: theme.palette.background.paper,
@@ -183,31 +183,31 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           zoomin: false,
           zoomout: false,
           pan: PanToolIconHTML,
-          reset: RotateLeftIconHTML
-        }
-      }
+          reset: RotateLeftIconHTML,
+        },
+      },
     },
     colors: [blue, yellow, green],
     height: "500px",
     series: [
       {
         name: "CO2e",
-        data: co2SeriesData
+        data: co2SeriesData,
       },
       {
         name: "Kilowatt Hours",
-        data: kilowattHoursSeriesData
+        data: kilowattHoursSeriesData,
       },
       {
         name: "Cost",
-        data: costSeriesData
-      }
+        data: costSeriesData,
+      },
     ],
     stroke: {
-      width: 1
+      width: 1,
     },
     theme: {
-      mode: theme.palette.type
+      mode: theme.palette.type,
     },
     tooltip: {
       shared: true,
@@ -218,14 +218,14 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
             grouping={grouping}
           />
         );
-      }
+      },
     },
     title: {
       text: "Cloud Usage",
       offsetY: -8,
       style: {
-        fontSize: "24px"
-      }
+        fontSize: "24px",
+      },
     },
     xaxis: {
       type: "category",
@@ -234,17 +234,17 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
         text: "",
         offsetY: 18,
         style: {
-          fontSize: "15px"
-        }
+          fontSize: "15px",
+        },
       },
       labels: {
         formatter: function (val) {
           return moment(val).add(1, `d`).format(dateFormat[grouping]);
         },
         style: {
-          display: "contents !important"
-        }
-      }
+          display: "contents !important",
+        },
+      },
     },
     yaxis: [
       {
@@ -253,11 +253,11 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           text: "CO2e (metric tons)",
           offsetX: -8,
           style: {
-            fontSize: "15px"
-          }
+            fontSize: "15px",
+          },
         },
         tickAmount: 10,
-        decimalsInFloat: 3
+        decimalsInFloat: 3,
       },
       {
         max: 1.1 * maxKilowattHours,
@@ -266,20 +266,20 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           opposite: -8,
           style: {
             fontSize: "15px",
-            color: yellow
-          }
+            color: yellow,
+          },
         },
         tickAmount: 10,
         decimalsInFloat: 2,
         opposite: true,
         axisBorder: {
           show: true,
-          color: yellow
+          color: yellow,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
-        showAlways: false
+        showAlways: false,
       },
       {
         max: 1.1 * maxCost,
@@ -288,8 +288,8 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
           offsetX: 6,
           style: {
             fontSize: "15px",
-            color: green
-          }
+            color: green,
+          },
         },
         tickAmount: 10,
         decimalsInFloat: 2,
@@ -297,20 +297,20 @@ const ApexLineChart: FunctionComponent<ApexChartProps> = ({ data }) => {
         axisBorder: {
           show: true,
           color: green,
-          offsetX: -5
+          offsetX: -5,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
-        showAlways: false
-      }
+        showAlways: false,
+      },
     ],
     grid: {
       padding: {
         bottom: +15,
-        right: +20
-      }
-    }
+        right: +20,
+      },
+    },
   };
 
   return (
