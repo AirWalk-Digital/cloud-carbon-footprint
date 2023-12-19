@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   titleContainer: {
     backgroundColor: "#3F51B5",
@@ -24,18 +24,18 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 5
+    marginBottom: 5,
   },
   title: {
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: 20,
     lineHeight: 1,
-    color: "white"
+    color: "white",
   },
   textContent: {
     fontSize: 36,
-    textAlign: "center"
+    textAlign: "center",
   },
   contentContainer: {
     display: "flex",
@@ -45,27 +45,27 @@ const useStyles = makeStyles(() => ({
     gap: 30,
     width: "100%",
     minHeight: 350 - 79,
-    alignItems: "center"
+    alignItems: "center",
   },
   treeSeedlingsIcon: {
     width: 104,
     height: 104,
-    color: "#73B500"
+    color: "#73B500",
   },
   calendarIcon: {
     width: 90,
     height: 90,
     color: "#D99200",
     marginBottom: 13,
-    marginTop: 3
+    marginTop: 3,
   },
   contentItemsContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     minWidth: 180,
-    padding: 10
-  }
+    padding: 10,
+  },
 }));
 
 export default useStyles;
