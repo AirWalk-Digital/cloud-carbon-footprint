@@ -5,7 +5,10 @@
 import React, { FunctionComponent } from "react";
 import { CLOUD_PROVIDER_OPTIONS } from "../../common/FilterBar/utils/DropdownConstants";
 import FilterDropdown from "../../common/FilterDropdown";
-import { DropdownFilterOptions, DropdownOption, FilterProps, } from "../../Types";
+import { DropdownFilterOptions,
+         DropdownOption,
+        FilterProps, 
+       } from "../../Types";
 
 const CloudProviderFilter: FunctionComponent<FilterProps> = ({
   filters,
