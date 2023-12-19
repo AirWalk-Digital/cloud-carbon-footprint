@@ -6,7 +6,7 @@ import React, { FunctionComponent } from "react";
 import { toUpper } from "ramda";
 import Autocomplete, {
   AutocompleteRenderInputParams,
-  AutocompleteRenderOptionState
+  AutocompleteRenderOptionState,
 } from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
@@ -84,7 +84,7 @@ const FilterDropdown: FunctionComponent<FilterDropdownProps> = (props) => {
           >
             {props.displayValue}
           </Typography>
-        )
+        ),
       }}
     />
   );
