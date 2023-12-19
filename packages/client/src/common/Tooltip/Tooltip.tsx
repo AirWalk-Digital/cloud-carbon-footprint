@@ -12,7 +12,7 @@ type TooltipProps = {
 };
 
 const Tooltip: FunctionComponent<TooltipProps> = ({
-  message
+  message,
 }): ReactElement => {
   const classes = useStyles(MaterialTooltip);
   return (
