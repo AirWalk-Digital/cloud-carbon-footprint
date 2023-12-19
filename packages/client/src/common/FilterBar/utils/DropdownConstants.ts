@@ -28,37 +28,37 @@ export const ALL_ACCOUNTS_VALUE = "All Accounts";
 export const ALL_ACCOUNTS_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_ACCOUNTS_VALUE,
-  cloudProvider: ""
+  cloudProvider: "",
 };
 
 export const ALL_SERVICES_VALUE = "All Services";
 export const ALL_SERVICES_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
-  name: ALL_SERVICES_VALUE
+  name: ALL_SERVICES_VALUE,
 };
 
 export const ALL_CLOUD_PROVIDERS_VALUE = "All Providers";
 export const ALL_CLOUD_PROVIDERS_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
-  name: ALL_CLOUD_PROVIDERS_VALUE
+  name: ALL_CLOUD_PROVIDERS_VALUE,
 };
 export const CLOUD_PROVIDER_OPTIONS: DropdownOption[] = [
   ALL_CLOUD_PROVIDERS_DROPDOWN_OPTION,
-  ...alphabetizeDropdownOptions(config().CURRENT_PROVIDERS)
+  ...alphabetizeDropdownOptions(config().CURRENT_PROVIDERS),
 ];
 
 export const ALL_RECOMMENDATION_TYPES_VALUE = "All Recommendation Types";
 export const ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_RECOMMENDATION_TYPES_VALUE,
-  cloudProvider: ""
+  cloudProvider: "",
 };
 
 export const ALL_REGIONS_VALUE = "All Regions";
 export const ALL_REGIONS_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_REGIONS_VALUE,
-  cloudProvider: ""
+  cloudProvider: "",
 };
 
 export const ALL_DROPDOWN_FILTER_OPTIONS: AllFilterOptionMap = {
@@ -66,7 +66,7 @@ export const ALL_DROPDOWN_FILTER_OPTIONS: AllFilterOptionMap = {
   services: ALL_SERVICES_DROPDOWN_OPTION,
   cloudProviders: ALL_CLOUD_PROVIDERS_DROPDOWN_OPTION,
   recommendationTypes: ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION,
-  regions: ALL_REGIONS_DROPDOWN_OPTION
+  regions: ALL_REGIONS_DROPDOWN_OPTION,
 };
 
 export const buildAndOrderDropdownOptions = (
