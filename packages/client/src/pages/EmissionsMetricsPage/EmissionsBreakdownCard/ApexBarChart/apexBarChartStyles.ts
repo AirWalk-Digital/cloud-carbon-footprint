@@ -10,8 +10,8 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignContent: "center"
-  }
+    alignContent: "center",
+  },
 }));
 
 export default useStyles;
