@@ -17,7 +17,7 @@ type ErrorMessages = {
 const Error: FunctionComponent<ErrorProps> = ({ errorType, hasContainer }) => {
   const classes = useStyles();
   const containerClasses = clsx(classes.container, {
-    [classes.noContainer]: hasContainer
+    [classes.noContainer]: hasContainer,
   });
 
   const errorMessages: ErrorMessages = {
@@ -25,7 +25,7 @@ const Error: FunctionComponent<ErrorProps> = ({ errorType, hasContainer }) => {
       "In order to see a relevant savings forecast, please ensure your data is grouped by month, week, or day, and includes data from the past 30 days",
     RANGE:
       "In order to see a relevant savings forecast, please adjust your date range to include data from the past 30 days",
-    DAYS: "It appears you are missing data from the past 30 days. Please consider including the following dates for the most accurate forecast:"
+    DAYS: "It appears you are missing data from the past 30 days. Please consider including the following dates for the most accurate forecast:",
   };
 
   return (
