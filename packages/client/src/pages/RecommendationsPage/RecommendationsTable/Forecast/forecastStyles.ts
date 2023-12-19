@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     color: "rgba(0, 0, 0, 0.87)",
     padding: ".2em",
     paddingLeft: 0,
-    marginBottom: 25
+    marginBottom: 25,
   },
   forecastContainer: {
     display: "flex",
@@ -22,19 +22,19 @@ const useStyles = makeStyles(() => ({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: 20
+    gap: 20,
   },
   icon: {
     width: 75,
     height: 75,
-    color: "#EDEDED"
+    color: "#EDEDED",
   },
   equalSign: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 120
-  }
+    fontSize: 120,
+  },
 }));
 
 export default useStyles;
