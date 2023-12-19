@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
   },
   listBox: {
-    overflowWrap: "anywhere" //this works but cuts words out at the end, try to find better solution,
+    overflowWrap: "anywhere", //this works but cuts words out at the end, try to find better solution
   },
   textField: {
     backgroundColor: theme.palette.background.paper,
