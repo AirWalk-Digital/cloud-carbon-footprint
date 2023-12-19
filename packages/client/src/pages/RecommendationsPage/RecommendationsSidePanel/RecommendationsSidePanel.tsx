@@ -10,7 +10,7 @@ import { RecommendationsPanelRow, RecommendationsPanelColumn } from "./layout";
 import useStyles from "./recommendationsSidePanelStyles";
 import {
   tableFormatNearZero,
-  tableFormatRawCo2e
+  tableFormatRawCo2e,
 } from "../../../utils/helpers/transformData";
 import { co2eUnitLabel } from "../../../utils/helpers";
 
