@@ -23,7 +23,7 @@ const NoDataMessage: FunctionComponent<NoDataMessageProps> = ({
   isBold,
   isHalf,
   title,
-  boldTitle
+  boldTitle,
 }): ReactElement => {
   const classes = useStyles();
   const containerClass = clsx({ [classes.largeMessage]: isBold });
