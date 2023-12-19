@@ -44,13 +44,13 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
       id={`drawer-` + drawerStatus}
       className={clsx(classes.drawer, {
         [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open
+        [classes.drawerClose]: !open,
       })}
       classes={{
         paper: clsx({
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })
+          [classes.drawerClose]: !open,
+        }),
       }}
     >
       <IconButton
@@ -59,7 +59,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
         onClick={handleDrawerOpen}
         edge="start"
         className={clsx(classes.infoButton, {
-          [classes.hide]: open
+          [classes.hide]: open,
         })}
         id="info-button"
       >
@@ -67,7 +67,7 @@ const SidePanel: FunctionComponent<SidePanelProps> = (props) => {
       </IconButton>
       <div
         className={clsx(classes.toolbar, {
-          [classes.hide]: !open
+          [classes.hide]: !open,
         })}
       >
         <div
