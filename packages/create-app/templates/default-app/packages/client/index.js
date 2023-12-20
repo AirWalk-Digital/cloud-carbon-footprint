@@ -16,9 +16,9 @@ app.use(helmet())
 
 app.use(express.static('build'))
 
-app.listen(port, '0.0.0.0', () =>
+app.listen(port, () =>
   console.log(
-    `Cloud Carbon Footprint Server listening at http://0.0.0.0:${port}`,
+    `Cloud Carbon Footprint Server listening at http://localhost:${port}`,
   ),
 )
 
