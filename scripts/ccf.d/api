@@ -13,7 +13,7 @@ case ${1} in
   (noop) ;;
   (-h|--help) help;;
   (req|r)
-    http -v :4000/api/footprint start==2022-09-10 end==2022-09-11 ignoreCache==true groupBy==day
+    http -v :4000/api/footprint start==2023-01-01 end==2023-12-12 ignoreCache==true groupBy==day
   ;;
   (*) help ;;
 esac
