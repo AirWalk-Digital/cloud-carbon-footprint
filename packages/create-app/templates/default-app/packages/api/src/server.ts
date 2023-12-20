@@ -48,9 +48,9 @@ if (process.env.ENABLE_CORS) {
 
 httpApp.use('/api', createRouter())
 
-httpApp.listen(port, '0.0.0.0', () => {
+httpApp.listen(port, () => {
   serverLogger.info(
-    `Cloud Carbon Footprint Server listening at http://0.0.0.0:${port}`,
+    `Cloud Carbon Footprint Server listening at http://localhost:${port}`,
   )
   swaggerDocs(httpApp, Number(port))
 })
