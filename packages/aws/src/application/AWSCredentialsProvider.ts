@@ -35,6 +35,7 @@ export default class AWSCredentialsProvider {
           },
         })
       case 'EC2-METADATA':
+        console.log("Using EC2-METADATA for authentication")
         return new EC2MetadataCredentials({
           httpOptions: { timeout: 5000 },
           maxRetries: 10,
