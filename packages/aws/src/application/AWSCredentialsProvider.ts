@@ -23,6 +23,7 @@ export default class AWSCredentialsProvider {
           configLoader().AWS.authentication.options.proxyRoleName,
         )
       case 'AWS':
+        console.log("Using AWS for authentication")
         const partition = configLoader().AWS.IS_AWS_GLOBAL ? `aws` : `aws-cn`
         return new ChainableTemporaryCredentials({
           params: {
@@ -44,6 +45,7 @@ export default class AWSCredentialsProvider {
           maxRetries: 10,
         })
       default:
+        console.log("Using default for authentication")
         return new Credentials(awsConfig.credentials)
     }
   }
