@@ -29,7 +29,7 @@ export function App({ config = loadConfig() }: AppProps): ReactElement {
   const onApiError = useCallback(
     (e: AxiosError) => {
       console.error(e);
-      if(e.response){
+      if (e.response) {
         setErrorMessage(e.response.data);
       }
       navigate("/error", { state: formatAxiosError(e) });
